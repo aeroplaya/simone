@@ -69,58 +69,82 @@ text-shadow: 1px 2px 0px rgba(255,255,255,.5); /* 50% white from bottom */
 
   </head>
   <body bgcolor="#bdc1c9">
-<center>
-  <img src="assets/images/logo.png" style="width:300px;-webkit-filter: drop-shadow(6px 6px 12px rgba(0,0,0,0.6))" />
-</center>
-<br />
-  <div class="container">
-    <div class="files">
-      <fieldset style="height:100%;">
-        <legend><b><span id="droppedFolder">Drop folder here</span></b></legend>
-      <ol id="filelist">
-      </ol>
-    </fiesldset>
+    <div id="departments">
+      <center>
+        <img src="assets/images/logo.png" style="width:300px;-webkit-filter: drop-shadow(6px 6px 12px rgba(0,0,0,0.6))" />
+      </center>
+      <ul>
+        <li><a href="#prepress">Prepress</a></li>
+        <li><a href="#digital">Digital</a></li>
+        <li><a href="#signs">Signs</a></li>
+        <li><a href="#csr">CSR</a></li>
+        <li><a href="#estimating">Estimating</a></li>
+      </ul>
+      <div id="prepress">
+          <div class="container">
+            <div class="files">
+              <fieldset style="height:100%;">
+                <legend><b><span id="droppedFolder">Drop folder here</span></b></legend>
+              <ol id="filelist">
+              </ol>
+            </fiesldset>
 
+            </div>
+            <div class="details">
+              <fieldset style="height:100%;">
+                <legend><b>Selected Item Details</b></legend>
+                <p>Item: <span id="droppedtype"></span><br />
+                  Path: <span id="droppedpath"></span></p>
+                  <div class="ui-widget">
+                    <label>Stock: </label>
+                    <select id="combobox">
+                      <option value="">Select one...</option>
+                      <option value="16pt">16pt</option>
+                      <option value="100lb">100lb</option>
+                      <option value="uv">UV</option>
+                      <option value="matte">Matte</option>
+                    </select>
+                  </div>
+
+                  <p><label for="quantity">Quantity:</label>
+                    <input id="quantity" name="value"></p>
+
+
+                  <hr><br />
+                      <label for="checkbox-1" style="color: red;">Same Day</label>
+                      <input class="check" type="checkbox" name="checkbox-1" id="checkbox-1" >
+                      <label for="checkbox-2">One Sided</label>
+                      <input class="check" type="checkbox" name="checkbox-2" id="checkbox-2">
+                      <label for="checkbox-3">Die Cut</label>
+                      <input class="check" type="checkbox" name="checkbox-3" id="checkbox-3"><br /><br />
+                      <label for="checkbox-4">Rounded Corners</label>
+                      <input class="check" type="checkbox" name="checkbox-4" id="checkbox-4">
+                      <label for="checkbox-5">Foil</label>
+                      <input class="check" type="checkbox" name="checkbox-5" id="checkbox-5">
+                      <label for="checkbox-6">Spot</label>
+                      <input class="check" type="checkbox" name="checkbox-6" id="checkbox-6">
+
+
+              </ol>
+              </fiesldset>
+            </div>
+        </div>
+
+      </div>
+      <div id="digital">
+        <p>Digital dashboard</p>
+      </div>
+      <div id="signs">
+        <p>Signs Dasboard</p>
+      </div>
+      <div id="csr">
+        <p>CSR Dasboard</p>
+      </div>
+      <div id="estimating">
+        <p>Estimating Dasboard</p>
+      </div>
     </div>
-    <div class="details">
-      <fieldset style="height:100%;">
-        <legend><b>Selected Item Details</b></legend>
-        <p>Item: <span id="droppedtype"></span><br />
-          Path: <span id="droppedpath"></span></p>
-          <div class="ui-widget">
-            <label>Stock: </label>
-            <select id="combobox">
-              <option value="">Select one...</option>
-              <option value="16pt">16pt</option>
-              <option value="100lb">100lb</option>
-              <option value="uv">UV</option>
-              <option value="matte">Matte</option>
-            </select>
-          </div>
 
-          <p><label for="quantity">Quantity:</label>
-            <input id="quantity" name="value"></p>
-
-
-          <hr><br />
-              <label for="checkbox-1" style="color: red;">Same Day</label>
-              <input class="check" type="checkbox" name="checkbox-1" id="checkbox-1" >
-              <label for="checkbox-2">One Sided</label>
-              <input class="check" type="checkbox" name="checkbox-2" id="checkbox-2">
-              <label for="checkbox-3">Die Cut</label>
-              <input class="check" type="checkbox" name="checkbox-3" id="checkbox-3"><br /><br />
-              <label for="checkbox-4">Rounded Corners</label>
-              <input class="check" type="checkbox" name="checkbox-4" id="checkbox-4">
-              <label for="checkbox-5">Foil</label>
-              <input class="check" type="checkbox" name="checkbox-5" id="checkbox-5">
-              <label for="checkbox-6">Spot</label>
-              <input class="check" type="checkbox" name="checkbox-6" id="checkbox-6">
-
-
-      </ol>
-      </fiesldset>
-    </div>
-</div>
 
   </body>
   <script>
@@ -129,6 +153,8 @@ text-shadow: 1px 2px 0px rgba(255,255,255,.5); /* 50% white from bottom */
     $( "#filelist" ).selectable();
     $( ".check" ).checkboxradio();
     $( "#quantity" ).spinner({ step: 50 });
+    $( "#departments" ).tabs();
+
 
 //combo
 $.widget( "custom.combobox", {
