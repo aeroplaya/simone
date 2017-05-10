@@ -75,8 +75,9 @@ zbackground-color: #666;
 text-shadow: 1px 2px 0px rgba(255,255,255,.5); /* 50% white from bottom */
 }
 
-div {      padding:0px;
-      margin:0px;
+#departments {
+  padding:2px;
+  margin:2px;
 }
     </style>
 
@@ -92,8 +93,8 @@ div {      padding:0px;
         <li><a href="#signs">Signs</a></li>
         <li><a href="#csr">CSR</a></li>
         <li><a href="#estimating">Estimating</a></li>
-      </ul>
-      <div id="prepress" style="margin:0;padding:0;height:552px;">
+
+      <div id="prepress" style="margin:0;padding:0;">
           <div class="container">
             <div class="files">
               <fieldset style="height:100%;">
@@ -122,28 +123,29 @@ div {      padding:0px;
                   <p><label for="quantity">Quantity:</label>
                     <input id="quantity" name="value"></p>
 
-
-                  <hr><br />
-                    <label for="sameday" style="color: red;">Same Day</label>
-                      <input class="check" type="checkbox" name="sameday" id="sameday" >
-                    <label for="urgent" style="color: red;">URGENT</label>
+                  <center>
+                  <hr>
+                    <label for="sameday" style="color:rgba(153,0,51,1);">Same Day</label>
+                      <input class="check sameday" type="checkbox" name="sameday" id="sameday" >
+                    <label for="urgent" style="color:rgba(204,102,0,1);">URGENT</label>
                       <input class="check" type="checkbox" name="urgent" id="urgent" >
-                    <label for="onesided">One Sided</label>
+                    <label for="onesided" style="color:rgba(153,0,153,1);">One Sided</label>
                       <input class="check" type="checkbox" name="onesided" id="onesided">
-                    <label for="diecut">Die Cut</label>
+                    <label for="diecut" style="color:rgba(255,255,0,1);">Die Cut</label>
                       <input class="check" type="checkbox" name="diecut" id="diecut">
-                    <label for="roundedcorners">Rounded Corners</label>
+                    <label for="roundedcorners" style="color:rgba(153,153,0,1);">Rounded Corners</label>
                       <input class="check" type="checkbox" name="roundedcorners" id="roundedcorners">
-                    <label for="scoring">Scoring</label>
+                    <label for="scoring" style="color:rgba(255,255,102,1);">Scoring</label>
                       <input class="check" type="checkbox" name="scoring" id="scoring">
-                    <label for="foilstamp">Foil Stamp</label>
+                    <label for="foilstamp" style="color:rgba(255,204,51,1);">Foil Stamp</label>
                       <input class="check" type="checkbox" name="foilstamp" id="foilstamp">
-                    <label for="emboss">Emboss</label>
+                    <label for="emboss" style="color:rgba(255,204,51,1);">Emboss</label>
                       <input class="check" type="checkbox" name="emboss" id="emboss">
-                    <label for="uv">UV</label>
+                    <label for="uv" style="color:rgba(102,102,102,1);">UV</label>
                       <input class="check" type="checkbox" name="uv" id="uv">
-                    <label for="matte">Matte</label>
+                    <label for="matte" style="color:rgba(0,255,204,1);">Matte</label>
                       <input class="check" type="checkbox" name="matte" id="matte">
+                    </center>
               </ol>
               </fiesldset>
             </div>
@@ -162,7 +164,8 @@ div {      padding:0px;
       <div id="estimating">
         <p>Estimating Dasboard</p>
       </div>
-    </div>
+    </ul>
+  </div>
 
 
   </body>
