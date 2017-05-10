@@ -25,8 +25,8 @@ function createMainWindow () {
   var dimensions = mainScreen.size;
 
   // Create the browser window.
-  mainWindow = new BrowserWindow({width: 800, height: dimensions.height-45,
-    transparent: false,frame: true,toolbar: true,resizable: false,titleBarStyle:'default',type:'textured',kiosk: false,acceptFirstMouse: false})
+  mainWindow = new BrowserWindow({width: 800, height: 530,
+    transparent: false,frame: true,toolbar: true,resizable: true,titleBarStyle:'default',type:'textured',kiosk: false,acceptFirstMouse: false})
 
   mainWindow.setPosition(dimensions.width-800, 1)
 
