@@ -2,7 +2,7 @@ const {remote, ipcRenderer} = require('electron')
 const {Menu, MenuItem} = remote
 const template = [
   {
-    label: 'GATEWAYflow',
+    label: 'simone',
       submenu: [
         {label: 'Preferences'},
         {type: 'separator'},
