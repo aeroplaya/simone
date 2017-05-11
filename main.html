@@ -390,7 +390,7 @@ $.widget( "custom.combobox", {
              document.getElementById('droppedFolder').innerHTML=name;
 
               fs.readdir(path, function(err, items) {
-              var cList = $('#filelist')
+              var cList = $('#filelist');
               $.each(items, function(i) {
                 if (items[i]!='.DS_Store'){
                   var li = $('<li/>')
