@@ -84,9 +84,7 @@ text-shadow: 1px 2px 0px rgba(255,255,255,.5); /* 50% white from bottom */
   </head>
   <body id="departments" >
     <div >
-      <center>
-        <img src="assets/images/simone.png" style="width:300px;-webkit-filter: drop-shadow(6px 6px 12px rgba(0,0,0,0.6))" />
-      </center>
+      <img id="logo" src="assets/images/simone.png" style="margin:10px;height:80px;-webkit-filter: drop-shadow(6px 6px 12px rgba(0,0,0,0.8))" />
       <ul>
         <li><a href="#prepress">Prepress</a></li>
         <li><a href="#digital">Digital</a></li>
@@ -169,8 +167,32 @@ text-shadow: 1px 2px 0px rgba(255,255,255,.5); /* 50% white from bottom */
 
   </body>
   <script>
+
+
+
+
+
+
   //JQUERY initialization
   $( function() {
+
+    //load OS logo
+    switch(process.platform) {
+        case "darwin":
+          $("#logo").attr("src","assets/images/simonemac.png");
+            break;
+          case "win32":
+          $("#logo").attr("src","assets/images/simonepc.png");
+          break;
+          case "web":
+          $("#logo").attr("src","assets/images/simoneweb.png");
+          break;
+          default:
+          $("#logo").attr("src","assets/images/simone.png");
+        }
+
+
+
     $( "#filelist" ).selectable();
     $( ".check" ).checkboxradio();
     $( "#quantity" ).spinner({ step: 50 });
