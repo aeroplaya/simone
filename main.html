@@ -109,12 +109,12 @@ text-shadow: 1px 2px 0px rgba(255,255,255,.5); /* 50% white from bottom */
               Path: <span id="droppedpath"></span></p>
               <div class="ui-widget">
                 <label>Stock: </label>
-                <select id="combobox">
-                  <option value="">Select one...</option>
-                  <option value="16pt">16pt</option>
-                  <option value="100lb">100lb</option>
-                  <option value="uv">UV</option>
-                  <option value="matte">Matte</option>
+                <select id="stockbox">
+                </select>
+              </div>
+              <div class="ui-widget">
+                <label>Size: </label>
+                <select id="sizebox">
                 </select>
               </div>
 
@@ -330,9 +330,11 @@ $.widget( "custom.combobox", {
       }
     });
 
-    $( "#combobox" ).combobox();
+    $( "#stockbox" ).combobox();
+    $( "#sizebox" ).combobox();
     $( "#toggle" ).on( "click", function() {
-      $( "#combobox" ).toggle();
+      $( "#stockbox" ).toggle();
+      $( "#sizebox" ).toggle();
     });
 
 
@@ -351,6 +353,26 @@ $.widget( "custom.combobox", {
 
     //node.js
     var fs = require("fs");
+
+    //read-build stock menu
+    var array = fs.readFileSync('data/stock.txt').toString().split("\n");
+    for(i in array) {
+        buildSelect("#stockbox",array[i])
+    }
+    //read-build size menu
+    var array = fs.readFileSync('data/size.txt').toString().split("\n");
+    for(i in array) {
+        buildSelect("#sizebox",array[i])
+    }
+
+    function buildSelect(selectid,item) {
+      $(selectid).append($('<option>', {
+          value: item,
+          text: item
+      }));
+    }
+
+
     //var sys = require('sys');
     //var exec = require('child_process');
     const shell=require('electron').shell;

@@ -25,7 +25,7 @@ function createMainWindow () {
   var dimensions = mainScreen.size;
 
   // Create the browser window.
-  mainWindow = new BrowserWindow({width: 800, height: 570,
+  mainWindow = new BrowserWindow({width: 800, height: 595,
     transparent: false,frame: true,toolbar: true,resizable: true,titleBarStyle:'default',type:'textured',kiosk: false,acceptFirstMouse: false})
 
   mainWindow.setPosition(dimensions.width-800, 1)
@@ -34,7 +34,7 @@ function createMainWindow () {
   mainWindow.loadURL(`file://${__dirname}/main.html`)
 
   // Open the DevTools.
-  mainWindow.webContents.openDevTools()
+  //mainWindow.webContents.openDevTools()
 
   // Emitted when the window is closed.
   mainWindow.on('closed', function () {
