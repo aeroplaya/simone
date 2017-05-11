@@ -348,6 +348,7 @@ $.widget( "custom.combobox", {
     });
 
 
+
     //node.js
     var fs = require("fs");
     //var sys = require('sys');
@@ -391,6 +392,7 @@ $.widget( "custom.combobox", {
               fs.readdir(path, function(err, items) {
               var cList = $('#filelist')
               $.each(items, function(i) {
+                if (items[i]!='.DS_Store'){
                   var li = $('<li/>')
                   .addClass('ui-widget-content')
                   .appendTo(cList);
@@ -398,6 +400,7 @@ $.widget( "custom.combobox", {
                   .addClass('ui-all')
                   .text(items[i])
                   .appendTo(li);
+                }
                 });
               });
             }
