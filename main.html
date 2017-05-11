@@ -21,7 +21,7 @@
       zbackground: rgba(0, 0, 0, 0);
       font-family: "Arial", Arial, san-serif;
       padding:0px;
-      margin:0px;
+      margin:2px;
     }
 
 #feedback { font-size: 1.4em; }
@@ -31,17 +31,7 @@
 #filelist li { margin: 3px; padding: 0.4em; font-size: .7em; height: 10px; }
 
 label {margin:4px;}
-.container {
-    display:table;
-    width: 100%;
-    height: 100%;
-    zbackground: aqua;
-    padding:0px;
-    margin:0px;
-    vertical-align: top;
-}
 .files {
-    display:table-cell;
     width: 30%;
     height: 100%;
     zbackground: red;
@@ -51,7 +41,6 @@ label {margin:4px;}
     margin:0px;
 }
 .details {
-    display:table-cell;
     height: 100%;
     vertical-align: top;
     zmargin-left: 40%;
@@ -76,14 +65,14 @@ text-shadow: 1px 2px 0px rgba(255,255,255,.5); /* 50% white from bottom */
 }
 
 #departments {
-  padding:2px;
-  margin:2px;
+  padding:0px;
+  margin:0px;
 }
     </style>
 
   </head>
-  <body id="departments" >
-    <div >
+  <body id="departments">
+    <table style="width100%;height:100%;"><tr valign="top"><td>
       <img id="logo" src="assets/images/simone.png" style="float: right;margin:10px;height:80px;-webkit-filter: drop-shadow(6px 6px 12px rgba(0,0,0,0.8))" />
       <ul style="clear:right;">
         <li><a href="#prepress">Prepress</a></li>
@@ -92,17 +81,17 @@ text-shadow: 1px 2px 0px rgba(255,255,255,.5); /* 50% white from bottom */
         <li><a href="#csr">CSR</a></li>
         <li><a href="#estimating">Estimating</a></li>
   </ul>
-  <div id="prepress" style="margin:0;padding:0;">
-      <div class="container">
-        <div class="files">
-          <fieldset style="height:100%;">
+  <table style="height: calc(100% - 145px);"><tr><td id="prepress" style="margin:0;padding:0;height:100%;">
+<!--      <div class="container">-->
+    <tr><td class="files">
+          <fieldset style="overflow: scroll;">
             <legend><b><span id="droppedFolder">Drop folder here</span></b></legend>
-          <ol id="filelist">
+          <ol id="filelist" style="overflow-y: scroll;">
           </ol>
         </fiesldset>
 
-        </div>
-        <div class="details">
+      </td>
+        <td class="details">
           <fieldset style="height:100%;">
             <legend><b>Selected Item Details</b></legend>
             <p>Item: <span id="droppedtype"></span><br />
@@ -146,9 +135,9 @@ text-shadow: 1px 2px 0px rgba(255,255,255,.5); /* 50% white from bottom */
                 </center>
           </ol>
           </fiesldset>
-        </div>
-    </div>
-  </div>
+        </td>
+<!--container    </div> -->
+  </td></tr></table>
       <div id="digital">
         <p>Digital dashboard</p>
       </div>
@@ -162,7 +151,7 @@ text-shadow: 1px 2px 0px rgba(255,255,255,.5); /* 50% white from bottom */
         <p>Estimating Dasboard</p>
       </div>
 
-  </div>
+  </td></tr></table>
 
 
   </body>
@@ -175,6 +164,14 @@ text-shadow: 1px 2px 0px rgba(255,255,255,.5); /* 50% white from bottom */
 
   //JQUERY initialization
   $( function() {
+
+    //resize body
+    $('body').css('height', (window.innerHeight-10)+'px');
+
+    //on resize window
+    $(window).on('resize', function(){
+      $('body').css('height', (window.innerHeight-10)+'px');
+    });
 
     //load OS logo
     switch(process.platform) {
