@@ -51,7 +51,7 @@ label {margin:4px;}
 }
 fieldset
 {
-    border: 3px solid;
+    border: 2px;
     border-style: groove;
     border-radius: 8px;
     height: 100%;
@@ -72,17 +72,17 @@ text-shadow: 1px 2px 0px rgba(255,255,255,.5); /* 50% white from bottom */
 
   </head>
   <body >
-      <img id="logo" src="assets/images/simone.png" style="float: right;margin:10px;height:80px;-webkit-filter: drop-shadow(6px 6px 12px rgba(0,0,0,0.8))" />
-      <table id="departments" style="clear:right;width100%;height:calc(100% - 100px);"><tr valign="top"><td>
-      <ul>
+      <img id="logo" src="assets/images/simone.png" style="float: right;margin:10px;height:80px;-webkit-filter: drop-shadow(6px 6px 12px rgba(0,0,0,0.9))" />
+      <div id="departments" style="clear:right;width100%;height:calc(100% - 100px);">
+      <ul style="margin:-1px;">
         <li><a href="#prepress">Prepress</a></li>
         <li><a href="#digital">Digital</a></li>
         <li><a href="#signs">Signs</a></li>
         <li><a href="#csr">CSR</a></li>
         <li><a href="#estimating">Estimating</a></li>
   </ul>
-  <table><tr><td id="prepress" style="margin:0;padding:0;height:a;">
-<!--      <div class="container">-->
+  <div id="prepress" style="margin:0;padding:0">
+  <table><tr><td  style="margin:0;padding:0;height:auto;">
     <tr><td class="files">
           <fieldset style="overflow: scroll;">
             <legend><b><span id="droppedFolder">Drop folder here</span></b></legend>
@@ -136,8 +136,7 @@ text-shadow: 1px 2px 0px rgba(255,255,255,.5); /* 50% white from bottom */
           </ol>
           </fiesldset>
         </td>
-<!--container    </div> -->
-  </td></tr></table>
+  </td></tr></table></div>
       <div id="digital">
         <p>Digital dashboard</p>
       </div>
@@ -151,7 +150,7 @@ text-shadow: 1px 2px 0px rgba(255,255,255,.5); /* 50% white from bottom */
         <p>Estimating Dasboard</p>
       </div>
 
-  </td></tr></table>
+  </div>
 
 
   </body>
