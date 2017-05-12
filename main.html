@@ -21,7 +21,7 @@
       zbackground: rgba(0, 0, 0, 0);
       font-family: "Arial", Arial, san-serif;
       padding:0px;
-      margin:2px;
+      margin:0px;
     }
 
 #feedback { font-size: 1.4em; }
@@ -31,7 +31,17 @@
 #filelist li { margin: 3px; padding: 0.4em; font-size: .7em; height: 10px; }
 
 label {margin:4px;}
+.container {
+    display:table;
+    width: 100%;
+    height: 100%;
+    zbackground: aqua;
+    padding:0px;
+    margin:0px;
+    vertical-align: top;
+}
 .files {
+    display:table-cell;
     width: 30%;
     height: 100%;
     zbackground: red;
@@ -41,6 +51,7 @@ label {margin:4px;}
     margin:0px;
 }
 .details {
+    display:table-cell;
     height: 100%;
     vertical-align: top;
     zmargin-left: 40%;
@@ -51,7 +62,7 @@ label {margin:4px;}
 }
 fieldset
 {
-    border: 2px;
+    border: 3px solid;
     border-style: groove;
     border-radius: 8px;
     height: 100%;
@@ -65,33 +76,33 @@ text-shadow: 1px 2px 0px rgba(255,255,255,.5); /* 50% white from bottom */
 }
 
 #departments {
-  padding:0px;
-  margin:0px;
+  padding:2px;
+  margin:2px;
 }
     </style>
 
   </head>
-  <body >
-      <img id="logo" src="assets/images/simone.png" style="float: right;margin:10px;height:80px;-webkit-filter: drop-shadow(6px 6px 12px rgba(0,0,0,0.9))" />
-      <div id="departments" style="clear:right;width100%;height:calc(100% - 100px);">
-      <ul style="margin:-1px;">
+  <body id="departments" >
+    <div >
+      <img id="logo" src="assets/images/simone.png" style="float: right;margin:10px;height:80px;-webkit-filter: drop-shadow(6px 6px 12px rgba(0,0,0,0.8))" />
+      <ul style="clear:right;">
         <li><a href="#prepress">Prepress</a></li>
         <li><a href="#digital">Digital</a></li>
         <li><a href="#signs">Signs</a></li>
         <li><a href="#csr">CSR</a></li>
         <li><a href="#estimating">Estimating</a></li>
   </ul>
-  <div id="prepress" style="margin:0;padding:0">
-  <table><tr><td  style="margin:0;padding:0;height:auto;">
-    <tr><td class="files">
-          <fieldset style="overflow: scroll;">
+  <div id="prepress" style="margin:0;padding:0;">
+      <div class="container">
+        <div class="files">
+          <fieldset style="height:100%;">
             <legend><b><span id="droppedFolder">Drop folder here</span></b></legend>
-          <ol id="filelist" style="overflow-y: scroll;">
+          <ol id="filelist" style="overflow:none;">
           </ol>
         </fiesldset>
 
-      </td>
-        <td class="details">
+        </div>
+        <div class="details">
           <fieldset style="height:100%;">
             <legend><b>Selected Item Details</b></legend>
             <p>Item: <span id="droppedtype"></span><br />
@@ -135,8 +146,9 @@ text-shadow: 1px 2px 0px rgba(255,255,255,.5); /* 50% white from bottom */
                 </center>
           </ol>
           </fiesldset>
-        </td>
-  </td></tr></table></div>
+        </div>
+    </div>
+  </div>
       <div id="digital">
         <p>Digital dashboard</p>
       </div>
@@ -163,14 +175,6 @@ text-shadow: 1px 2px 0px rgba(255,255,255,.5); /* 50% white from bottom */
 
   //JQUERY initialization
   $( function() {
-
-    //resize body
-    $('body').css('height', (window.innerHeight-10)+'px');
-
-    //on resize window
-    $(window).on('resize', function(){
-      $('body').css('height', (window.innerHeight-10)+'px');
-    });
 
     //load OS logo
     switch(process.platform) {
