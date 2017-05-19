@@ -193,7 +193,10 @@ text-shadow: 1px 2px 0px rgba(255,255,255,.5); /* 50% white from bottom */
           $("#logo").attr("src","assets/images/simone.png");
         }
 
-
+        $(document).on('dblclick', '#filelist li', function(){
+          $(this).css('font-weight', 'bold');
+          //    shell.openItem(path.join(__dirname, 'test.docx'));
+        });
 
     $( "#filelist" ).selectable();
     $( ".check" ).checkboxradio();
@@ -379,6 +382,7 @@ $.widget( "custom.combobox", {
     //var exec = require('child_process');
     const shell=require('electron').shell;
     const opath=require('path');
+
 
 
     //prevent drag in drop in window
