@@ -529,15 +529,24 @@ watcher = hound.watch('./test')
 
 // Add callbacks for file and directory events.  The change event only applies
 // to files.
-watcher.on('create', function(file, stats) {
-  console.log(file + ' was created')
-})
-watcher.on('change', function(file, stats) {
-  console.log(file + ' was changed')
-})
+
+
+//use to change li content
+//     $("p:contains('no')").css("border", "solid red");
+
+
 watcher.on('delete', function(file) {
   console.log(file + ' was deleted')
 })
+
+watcher.on('create', function(file, stats) {
+    console.log(file + ' was created')
+})
+
+watcher.on('change', function(file, stats) {
+  console.log(file + ' was changed')
+})
+
 
 // Unwatch specific files or directories.
 //watcher.unwatch('/tmp/another_file')
