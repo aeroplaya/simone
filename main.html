@@ -84,13 +84,14 @@ text-shadow: 1px 2px 0px rgba(255,255,255,.5); /* 50% white from bottom */
   </head>
   <body id="departments" >
     <div >
-      <img id="logo" src="assets/images/simone.png" style="float: right;margin:10px;height:80px;-webkit-filter: drop-shadow(6px 6px 12px rgba(0,0,0,0.8))" />
       <ul style="clear:right;">
         <li><a href="#prepress">Prepress</a></li>
         <li><a href="#digital">Digital</a></li>
         <li><a href="#signs">Signs</a></li>
         <li><a href="#csr">CSR</a></li>
         <li><a href="#estimating">Estimating</a></li>
+        <img id="logo" src="assets/images/simone.png" style="float: right;margin:0px;height:42px;-webkit-filter: drop-shadow(6px 6px 12px rgba(0,0,0,0.8))" />
+
   </ul>
   <div id="prepress" style="margin:0;padding:0;">
       <div class="container">
@@ -196,9 +197,15 @@ text-shadow: 1px 2px 0px rgba(255,255,255,.5); /* 50% white from bottom */
         $(document).on('dblclick', '#filelist li', function(){
           $(this).css('font-weight', 'bold');
           //$(this).addClass('ui-icon ui-icon-check');
-          $(this).prepend('<img src="assets/images/x.png" height="15px">&nbsp;');
+          //  $(this).prepend('<img src="assets/images/x.png" height="15px">&nbsp;');
+          var filename=$(this).text();
+          //alert (folderpath +filename);
 
-          //    shell.openItem(path.join(__dirname, 'test.docx'));
+          const shell = require('electron').shell;
+          const path = require('path');
+
+          shell.openItem(path.join(folderpath, filename));
+          //shell.openItem(folderpath +filename);
         });
 
     $( "#filelist" ).selectable();
@@ -385,7 +392,7 @@ $.widget( "custom.combobox", {
     //var exec = require('child_process');
     const shell=require('electron').shell;
     const opath=require('path');
-
+    var folderpath;
 
 
     //prevent drag in drop in window
@@ -398,6 +405,7 @@ $.widget( "custom.combobox", {
 
       var path = ev.dataTransfer.files[0].path;
       var name = ev.dataTransfer.files[0].name;
+
       //document.getElementById('path').innerHTML=ev.dataTransfer.files[0].path;
         fs.stat(ev.dataTransfer.files[0].path, function (err, stats) {
            if (err) {
@@ -417,7 +425,8 @@ $.widget( "custom.combobox", {
 */
 
            } else {
-
+             folderpath = path;
+             $("#filelist").empty();
              document.getElementById('droppedFolder').innerHTML=name;
 
               fs.readdir(path, function(err, items) {
