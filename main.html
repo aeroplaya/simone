@@ -90,7 +90,7 @@ text-shadow: 1px 2px 0px rgba(255,255,255,.5); /* 50% white from bottom */
         <li><a href="#signs">Signs</a></li>
         <li><a href="#csr">CSR</a></li>
         <li><a href="#estimating">Estimating</a></li>
-        <img id="logo" src="assets/images/simone.png" style="float: right;margin:0px;height:42px;-webkit-filter: drop-shadow(6px 6px 12px rgba(0,0,0,0.8))" />
+        <img id="logo" src="assets/images/simone.png" style="float: right;margin:0px;height:42px;-webkit-filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.8))" />
 
   </ul>
   <div id="prepress" style="margin:0;padding:0;">
@@ -98,7 +98,7 @@ text-shadow: 1px 2px 0px rgba(255,255,255,.5); /* 50% white from bottom */
         <div class="files">
           <fieldset style="">
             <legend><b><span id="droppedFolder"><span style="color:green;">Drop folder here</span></span></b></legend>
-            <div style="height:350px;overflow-y:scroll;"
+            <div style="height:414px;overflow-y:scroll;"
               <ol id="filelist" style="overflow:none;">
               </ol>
             </div>
@@ -107,22 +107,34 @@ text-shadow: 1px 2px 0px rgba(255,255,255,.5); /* 50% white from bottom */
         </div>
         <div class="details">
           <fieldset style="height:100%;">
-            <legend><b>Selected Item Details</b></legend>
-            <p>Item: <span id="droppedtype"></span><br />
-              Path: <span id="droppedpath"></span></p>
-              <div class="ui-widget">
-                <label>Stock: </label>
-                <select id="stockbox">
-                </select>
-              </div>
-              <div class="ui-widget">
-                <label>Size: </label>
-                <select id="sizebox">
-                </select>
-              </div>
-
-              <p><label for="quantity">Quantity:</label>
+            <legend><b><span id="selectedItem">&nbsp;</span></b></legend>
+            <table><tr>
+              <td>
+                <p>Item: <span id="droppedtype"></span><br />
+                Path: <span id="droppedpath"></span></p>
+                <div class="ui-widget">
+                  <label>Stock: </label>
+                  <select id="stockbox">
+                  </select>
+                </div>
+                <div class="ui-widget">
+                  <label>Size: </label>
+                  <select id="sizebox">
+                  </select>
+                </div>
+                <p><label for="quantity">Quantity:</label>
                 <input id="quantity" name="value"></p>
+              </td><td width="200" style="border-style: solid; border:0px;
+    border-left: 1px groove;text-align:center;">
+                <label for="po" style="width:80%;">Hold: PO</label>
+                <input class="directive" type="radio" name="po" id="po">
+                <label for="approval" style="width:80%;">Hold: Approval</label>
+                <input class="directive" type="radio" name="approval" id="approval">
+                <label for="newfile" style="width:80%;">Hold: New File</label>
+                <input class="directive" type="radio" name="newfile" id="newfile">
+                <button style="width:98%;margin-top:20px;" class="ui-button ui-widget ui-corner-all">Cancel Order</button><br />
+                <button style="width:98%;;margin-top:10px;" class="ui-button ui-widget ui-corner-all">Commit Order</button>
+              </td></tr></table>
 
               <center>
               <hr>
@@ -194,6 +206,13 @@ text-shadow: 1px 2px 0px rgba(255,255,255,.5); /* 50% white from bottom */
           $("#logo").attr("src","assets/images/simone.png");
         }
 
+
+
+          $(function () {
+            $('#filelist').on('click', 'li', function () {
+              document.getElementById('selectedItem').innerHTML=$(this).text();
+            });
+          });
         $(document).on('dblclick', '#filelist li', function(){
           $(this).css('font-weight', 'bold');
           //$(this).addClass('ui-icon ui-icon-check');
@@ -208,10 +227,16 @@ text-shadow: 1px 2px 0px rgba(255,255,255,.5); /* 50% white from bottom */
           //shell.openItem(folderpath +filename);
         });
 
+
+
+
+
     $( "#filelist" ).selectable();
     $( ".check" ).checkboxradio();
     $( "#quantity" ).spinner({ step: 50 });
     $( "#departments" ).tabs();
+    $( ".directive" ).checkboxradio();
+
 
 
 //combo
