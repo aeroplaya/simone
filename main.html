@@ -426,7 +426,16 @@ $.widget( "custom.combobox", {
 
     });
 
-
+//FUNCTION list
+//sort list
+function sortUL(selector) {
+var $ul = $(selector);
+$ul.find('li').sort(function (a, b) {
+    var upA = $(a).text().toUpperCase();
+    var upB = $(b).text().toUpperCase();
+    return (upA < upB) ? -1 : (upA > upB) ? 1 : 0;
+}).appendTo(selector);
+};
 
     //node.js
     var fs = require("fs");
@@ -448,6 +457,8 @@ $.widget( "custom.combobox", {
           text: item
       }));
     }
+
+
 
 
     //var sys = require('sys');
@@ -493,6 +504,7 @@ $.widget( "custom.combobox", {
 
               fs.readdir(path, function(err, items) {
               var cList = $('#filelist');
+              items.sort();
               $.each(items, function(i) {
                 if (items[i]!='.DS_Store'){
                   var li = $('<li/>')
@@ -504,7 +516,72 @@ $.widget( "custom.combobox", {
                   .appendTo(li);
                 }
                 });
+
               });
+
+              //watch require
+              hound = require("./assets/js/hound.js")
+
+              // Watch dropped folder
+              watcher = hound.watch(folderpath)
+
+              //clear watches
+              watcher.clear()
+
+              // Watch dropped folder
+              watcher = hound.watch(folderpath)
+
+
+              // Create a file watcher.
+              //watcher = hound.watch('/tmp/file.txt')
+
+              // Add callbacks for file and directory events.  The change event only applies
+              // to files.
+
+
+              //use to change li content
+              //     $("li:contains('no')").css("border", "solid red");
+
+
+              watcher.on('delete', function(file) {
+                //remove file from list
+                var filename= file.split('\\').pop().split('/').pop();
+                $("li:contains('" + filename + "')").remove();
+                //console.log(file + ' was deleted')
+              })
+
+              watcher.on('create', function(file, stats) {
+                  console.log(file + ' was created')
+
+                  var filename= file.split('\\').pop().split('/').pop();
+
+
+                  var li = $('<li/>')
+                  .addClass('ui-widget-content')
+                  .appendTo('#filelist');
+                  var aaa = $('<a/>')
+                  .addClass('ui-all')
+                  .text(filename)
+                  .appendTo(li);
+                  sortUL("#filelist");
+
+              })
+
+              watcher.on('change', function(file, stats) {
+                console.log(file + ' was changed')
+              })
+
+
+              // Unwatch specific files or directories.
+              //watcher.unwatch('/tmp/another_file')
+
+              // Unwatch all watched files and directories.
+              //watcher.clear()
+
+
+
+
+
             }
 
            //console.log(stats);
@@ -518,41 +595,7 @@ $.widget( "custom.combobox", {
     }
 
 
-//watch
-hound = require("./assets/js/hound.js")
 
-// Create a directory tree watcher.
-watcher = hound.watch('./test')
-
-// Create a file watcher.
-//watcher = hound.watch('/tmp/file.txt')
-
-// Add callbacks for file and directory events.  The change event only applies
-// to files.
-
-
-//use to change li content
-//     $("p:contains('no')").css("border", "solid red");
-
-
-watcher.on('delete', function(file) {
-  console.log(file + ' was deleted')
-})
-
-watcher.on('create', function(file, stats) {
-    console.log(file + ' was created')
-})
-
-watcher.on('change', function(file, stats) {
-  console.log(file + ' was changed')
-})
-
-
-// Unwatch specific files or directories.
-//watcher.unwatch('/tmp/another_file')
-
-// Unwatch all watched files and directories.
-//watcher.clear()
 
 
 
