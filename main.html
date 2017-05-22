@@ -8,10 +8,13 @@
     <!--Jquery stuff -->
     <link rel="stylesheet" href="assets/ui/jquery-ui.min.css" type="text/css" />
     <link rel="stylesheet" href="assets/ui/jquery-ui.theme.min.css" type="text/css" />
+    <link rel="stylesheet" href="assets/js/easyautocomplete/easy-autocomplete.min.css" type="text/css" />
     <!-- Insert this line above script imports  -->
     <script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
     <script src="assets/js/jquery-3.2.1.min.js"></script>
     <script src="assets/ui/jquery-ui.min.js"></script>
+    <script src="assets/js/easyautocomplete/jquery.easy-autocomplete.min.js"></script>
+
     <!-- Insert this line after script imports -->
     <script>if (window.module) module = window.module;</script>
     <!--End Jquery stuff -->
@@ -86,8 +89,9 @@ text-shadow: 1px 2px 0px rgba(255,255,255,.5); /* 50% white from bottom */
   margin:2px;
 }
 .small {
-   font-size: .8em !important;
+   font-size: .7em !important;
 }
+
     </style>
 
   </head>
@@ -107,7 +111,8 @@ text-shadow: 1px 2px 0px rgba(255,255,255,.5); /* 50% white from bottom */
         <div class="files">
           <fieldset style="">
             <legend><b><span id="droppedFolder"><span style="color:green;">Drop folder here</span></span></b></legend>
-            <div style="height:571px;overflow-y:scroll;"
+            <input id="search" style="width:100%;" type="search" placeholder="Search" results="0" />
+            <div style="height:515px;overflow-y:scroll;">
               <ol id="filelist" style="overflow:none;">
               </ol>
             </div>
@@ -116,33 +121,39 @@ text-shadow: 1px 2px 0px rgba(255,255,255,.5); /* 50% white from bottom */
         </div>
         <div class="details">
           <fieldset style="height:100%;">
-            <legend><b><span id="selectedItem">&nbsp;</span></b></legend>
-            <table><tr>
-              <td>
-                <p>Item: <span id="droppedtype"></span><br />
-                Path: <span id="droppedpath"></span></p>
-                <div class="ui-widget">
-                  <label>Stock: </label>
-                  <select id="stockbox">
-                  </select>
-                </div>
-                <div class="ui-widget">
-                  <label>Size: </label>
-                  <select id="sizebox">
-                  </select>
-                </div>
-                <p><label for="quantity">Quantity:</label>
-                <input id="quantity" name="value"></p>
-              </td><td width="200" style="border-style: solid; border:0px;
+            <legend><b><span style="font-size:.7em;color:#6997E0;" id="selectedItem">No file</span></b></legend>
+            <table width="100%"><tr>
+              <td><table width="100%">
+                <tr>
+                <td style="font-size:.8em;">U# / S#:</td><td><input style="font-size:1em;" class="ui-widget ui-widget-content ui-corner-all" id="droppedusno" /></td></tr>
+                <tr>
+                <td style="font-size:.8em;">Customer:</td><td><input style="font-size:1em;" class="ui-widget ui-widget-content ui-corner-all" id="droppedcustomer" /></td></tr>
+                <tr>
+                <td style="font-size:.8em;" colspan="2">
+                   <div style="float:left;margin-left:20px;">
+                     <input placeholder="Size" class="ui-widget ui-widget-content ui-corner-all" id="sizebox" size="15" />
+                   </div>
+                   <div style="float:left;margin-left:20px;">
+                     <input placeholder="Stock" class="ui-widget ui-widget-content ui-corner-all" id="stockbox" size="15" />
+                   </div>
+                </td></tr>
+                <tr>
+                <td style="font-size:.8em;">Quantity:</td><td><input style="font-size:.9em;" size="8" id="droppedqty" /></td></tr>
+                <td style="font-size:.8em;">Notes:</td><td><textarea rows="3" style="font-size:.9em;resize:none;overflow-y;scroll;overflow-x;none;width:95%;" class="ui-widget ui-widget-content ui-corner-all" id="droppedqty"></textarea></td></tr>
+
+
+
+              </table>
+              </td><td width="160px;" style="border-style: solid; border:0px;
     border-left: 1px groove;text-align:center;">
-                <label for="po" style="width:80%;">Hold: PO</label>
+                <label class="small" for="po" style="width:79%;">Hold: PO</label>
                 <input class="directive" type="radio" name="po" id="po">
-                <label for="approval" style="width:80%;">Hold: Approval</label>
+                <label class="small" for="approval" style="width:79%;">Hold: Approval</label>
                 <input class="directive" type="radio" name="approval" id="approval">
-                <label for="newfile" style="width:80%;">Hold: New File</label>
+                <label class="small" for="newfile" style="width:79%;">Hold: New File</label>
                 <input class="directive" type="radio" name="newfile" id="newfile">
-                <button style="width:98%;margin-top:20px;" class="ui-button ui-widget ui-corner-all">Cancel Order</button><br />
-                <button style="width:98%;;margin-top:10px;" class="ui-button ui-widget ui-corner-all">Commit Order</button>
+                <button style="width:98%;margin-top:20px;" class="ui-button ui-widget ui-corner-all small">Cancel Order</button><br />
+                <button style="width:98%;;margin-top:10px;" class="ui-button ui-widget ui-corner-all small">Commit Order</button>
               </td></tr></table>
 
               <center>
@@ -154,6 +165,8 @@ text-shadow: 1px 2px 0px rgba(255,255,255,.5); /* 50% white from bottom */
                   <input class="check sameday" type="radio" name="sameday" id="sameday" >
                 <label class="small" for="urgent" style="color:rgba(204,102,0,1);">URGENT</label>
                   <input class="check" type="radio" name="urgent" id="urgent" >
+                <label class="small" for="priority">Priority</label>
+                  <input class="check" type="radio" name="priority" id="priority" >
               </fieldset>
               <fieldset class="fieldsetsmall"><legend class="small">Press</legend>
                 <label class="small" for="onesided" style="">One Sided</label>
@@ -178,6 +191,12 @@ text-shadow: 1px 2px 0px rgba(255,255,255,.5); /* 50% white from bottom */
                   <input class="check" type="checkbox" name="machinefold" id="machinefold">
                 <label class="small" for="duplo" style="">Duplo</label>
                   <input class="check" type="checkbox" name="duplo" id="duplo">
+                <label class="small" for="uv" style="">UV</label>
+                  <input class="check" type="checkbox" name="uv" id="uv">
+                <label class="small" for="glosslaminate" style="">Gloss Laminate</label>
+                  <input class="check" type="checkbox" name="glosslaminate" id="glosslaminate">
+                <label class="small" for="mattelaminate" style="">Matte Laminate</label>
+                  <input class="check" type="checkbox" name="mattelaminate" id="mattelaminate">
                 <label class="small" for="diecut" style="">Die Cut</label>
                   <input class="check" type="checkbox" name="diecut" id="diecut">
                 <label class="small" for="score" style="">Score</label>
@@ -194,6 +213,15 @@ text-shadow: 1px 2px 0px rgba(255,255,255,.5); /* 50% white from bottom */
                   <input class="check" type="checkbox" name="roundedcorners" id="roundedcorners">
                 <label class="small" for="drill" style="">Drill</label>
                   <input class="check" type="checkbox" name="drill" id="drill">
+<label class="small" for="handfold" style="">Hand Fold</label>
+<input class="check" type="checkbox" name="handfold" id="handfold">
+<label class="small" for="slipsheet" style="">Slip Sheet</label>
+<input class="check" type="checkbox" name="slipsheet" id="slipsheet">
+<label class="small" for="pad" style="">Pad</label>
+<input class="check" type="checkbox" name="pad" id="pad">
+<label class="small" for="glue" style="">Glue</label>
+<input class="check" type="checkbox" name="glue" id="glue">
+
                 </fieldset>
                 </center>
           </ol>
@@ -219,7 +247,8 @@ text-shadow: 1px 2px 0px rgba(255,255,255,.5); /* 50% white from bottom */
 
   </body>
   <script>
-
+//global variable declarations
+var selindex = null;
 
 
 
@@ -230,248 +259,102 @@ text-shadow: 1px 2px 0px rgba(255,255,255,.5); /* 50% white from bottom */
 
     //load OS logo
     switch(process.platform) {
-        case "darwin":
-          $("#logo").attr("src","assets/images/simonemac.png");
-            break;
-          case "win32":
-          $("#logo").attr("src","assets/images/simonepc.png");
+      case "darwin":
+        $("#logo").attr("src","assets/images/simonemac.png");
           break;
-          case "web":
-          $("#logo").attr("src","assets/images/simoneweb.png");
-          break;
-          default:
-          $("#logo").attr("src","assets/images/simone.png");
+        case "win32":
+        $("#logo").attr("src","assets/images/simonepc.png");
+        break;
+        case "web":
+        $("#logo").attr("src","assets/images/simoneweb.png");
+        break;
+        default:
+        $("#logo").attr("src","assets/images/simone.png");
+    }
+
+    //click on filelist item
+    $(function () {
+      $('#filelist').on('click', 'li', function () {
+        document.getElementById('selectedItem').innerHTML=$(this).text();
+        selindex = $(this).parent().children().index(this);
+        //alert("You clicked item " + selindex);
+      });
+    });
+
+    //doubleclick on filelist item
+    $(document).on('dblclick', '#filelist li', function(){
+      $(this).css('font-weight', 'bold');
+      var filename=$(this).text();
+      const shell = require('electron').shell;
+      const path = require('path');
+      shell.openItem(path.join(folderpath, filename));
+    });
+
+    //Trap arrows + shift-space
+    $(document).keydown(function(e) {
+      if ((e.which==32)&&(e.shiftKey)) {e.preventDefault();$('#search').val('');$("#search").focus();}
+      if ($("#search").is(":focus")) {
+        switch(e.which) {
+            case 37: // left
+              break;
+            case 38: // up
+              alert("up arrow");
+              break;
+            case 39: // right
+              break;
+            case 40: //
+              selindex++;
+              alert(selindex);
+              $( "li:eq( "+(selindex-1)+" )" ).removeClass("ui-selected");
+              $( "li:eq( "+selindex+" )" ).addClass("ui-selected");
+              break;
+            default: return; // exit this handler for other keys
         }
-
-
-
-          $(function () {
-            $('#filelist').on('click', 'li', function () {
-              document.getElementById('selectedItem').innerHTML=$(this).text();
-            });
-          });
-        $(document).on('dblclick', '#filelist li', function(){
-          $(this).css('font-weight', 'bold');
-          //$(this).addClass('ui-icon ui-icon-check');
-          //  $(this).prepend('<img src="assets/images/x.png" height="15px">&nbsp;');
-          var filename=$(this).text();
-          //alert (folderpath +filename);
-
-          const shell = require('electron').shell;
-          const path = require('path');
-
-          shell.openItem(path.join(folderpath, filename));
-          //shell.openItem(folderpath +filename);
-        });
-
-
-
-
-
-    $( "#filelist" ).selectable();
-    $( ".check" ).checkboxradio();
-    $( "#quantity" ).spinner({ step: 50 });
-    $( "#departments" ).tabs();
-    $( ".directive" ).checkboxradio();
-
-
-
-//combo
-$.widget( "custom.combobox", {
-      _create: function() {
-        this.wrapper = $( "<span>" )
-          .addClass( "custom-combobox" )
-          .insertAfter( this.element );
-
-        this.element.hide();
-        this._createAutocomplete();
-        this._createShowAllButton();
-      },
-
-      _createAutocomplete: function() {
-        var selected = this.element.children( ":selected" ),
-          value = selected.val() ? selected.text() : "";
-
-        this.input = $( "<input>" )
-          .appendTo( this.wrapper )
-          .val( value )
-          .attr( "title", "" )
-          .addClass( "custom-combobox-input ui-widget ui-widget-content ui-state-default ui-corner-left" )
-          .autocomplete({
-            delay: 0,
-            minLength: 0,
-            source: $.proxy( this, "_source" )
-          })
-          .tooltip({
-            classes: {
-              "ui-tooltip": "ui-state-highlight"
-            }
-          });
-
-        this._on( this.input, {
-          autocompleteselect: function( event, ui ) {
-            ui.item.option.selected = true;
-            this._trigger( "select", event, {
-              item: ui.item.option
-            });
-          },
-
-          autocompletechange: "_removeIfInvalid"
-        });
-      },
-
-      _createShowAllButton: function() {
-        var input = this.input,
-          wasOpen = false;
-
-        $( "<a>" )
-          .attr( "tabIndex", -1 )
-          .attr( "title", "Show All Items" )
-          .tooltip()
-          .appendTo( this.wrapper )
-          .button({
-            icons: {
-              primary: "ui-icon-triangle-1-s"
-            },
-            text: false
-          })
-          .removeClass( "ui-corner-all" )
-          .addClass( "custom-combobox-toggle ui-corner-right" )
-          .on( "mousedown", function() {
-            wasOpen = input.autocomplete( "widget" ).is( ":visible" );
-          })
-          .on( "click", function() {
-            input.trigger( "focus" );
-
-            // Close if already visible
-            if ( wasOpen ) {
-              return;
-            }
-
-            // Pass empty string as value to search for, displaying all results
-            input.autocomplete( "search", "" );
-          });
-      },
-
-      _source: function( request, response ) {
-        var matcher = new RegExp( $.ui.autocomplete.escapeRegex(request.term), "i" );
-        response( this.element.children( "option" ).map(function() {
-          var text = $( this ).text();
-          if ( this.value && ( !request.term || matcher.test(text) ) )
-            return {
-              label: text,
-              value: text,
-              option: this
-            };
-        }) );
-      },
-
-      _removeIfInvalid: function( event, ui ) {
-
-        // Selected an item, nothing to do
-        if ( ui.item ) {
-          return;
-        }
-
-        // Search for a match (case-insensitive)
-        var value = this.input.val(),
-          valueLowerCase = value.toLowerCase(),
-          valid = false;
-        this.element.children( "option" ).each(function() {
-          if ( $( this ).text().toLowerCase() === valueLowerCase ) {
-            this.selected = valid = true;
-            return false;
-          }
-        });
-
-        // Found a match, nothing to do
-        if ( valid ) {
-          return;
-        }
-
-        // Remove invalid value
-        this.input
-          .val( "" )
-          .attr( "title", value + " didn't match any item" )
-          .tooltip( "open" );
-        this.element.val( "" );
-        this._delay(function() {
-          this.input.tooltip( "close" ).attr( "title", "" );
-        }, 2500 );
-        this.input.autocomplete( "instance" ).term = "";
-      },
-
-      _destroy: function() {
-        this.wrapper.remove();
-        this.element.show();
+        e.preventDefault(); // prevent the default action (scroll / move caret)
       }
     });
 
-    $( "#stockbox" ).combobox();
-    $( "#sizebox" ).combobox();
-    $( "#toggle" ).on( "click", function() {
-      $( "#stockbox" ).toggle();
-      $( "#sizebox" ).toggle();
-    });
 
+    //initialize widgets
+    $( "#filelist" ).selectable();
+    $( ".check" ).checkboxradio();
+    $( "#droppedqty" ).spinner({ step: 50 });
+    $( "#departments" ).tabs();
+    $( ".directive" ).checkboxradio();
+    var options = {url: "data/size.js"};
+    $("#sizebox").easyAutocomplete(options);
+    var options = {url: "data/stock.js"};
+    $("#stockbox").easyAutocomplete(options);
 
-
-/*  $(document).on('keydown', function(e) {
-    if ( e.which === 113) { //f1
-      alert("ttt");}
-    });
-*/
-
-
-
+//end Jquery init
     });
 
 //FUNCTION list
 //sort list
 function sortUL(selector) {
-var $ul = $(selector);
-$ul.find('li').sort(function (a, b) {
-    var upA = $(a).text().toUpperCase();
-    var upB = $(b).text().toUpperCase();
-    return (upA < upB) ? -1 : (upA > upB) ? 1 : 0;
-}).appendTo(selector);
+  var $ul = $(selector);
+  $ul.find('li').sort(function (a, b) {
+      var upA = $(a).text().toUpperCase();
+      var upB = $(b).text().toUpperCase();
+      return (upA < upB) ? -1 : (upA > upB) ? 1 : 0;
+  }).appendTo(selector);
 };
 
-    //node.js
-    var fs = require("fs");
-
-    //read-build stock menu
-    var array = fs.readFileSync('data/stock.txt').toString().split("\n");
-    for(i in array) {
-        buildSelect("#stockbox",array[i])
-    }
-    //read-build size menu
-    var array = fs.readFileSync('data/size.txt').toString().split("\n");
-    for(i in array) {
-        buildSelect("#sizebox",array[i])
-    }
-
-    function buildSelect(selectid,item) {
-      $(selectid).append($('<option>', {
-          value: item,
-          text: item
-      }));
-    }
+//node.js
+var fs = require("fs");
 
 
+//var sys = require('sys');
+//var exec = require('child_process');
+const shell=require('electron').shell;
+const opath=require('path');
+var folderpath;
 
 
-    //var sys = require('sys');
-    //var exec = require('child_process');
-    const shell=require('electron').shell;
-    const opath=require('path');
-    var folderpath;
-
-
-    //prevent drag in drop in window
-    document.ondragover = document.ondrop = (ev) => {
-      ev.preventDefault()
-    }
+//prevent drag in drop in window
+document.ondragover = document.ondrop = (ev) => {
+  ev.preventDefault()
+}
 
     document.ondrop = (ev) => {
       //console.log(ev.dataTransfer.files[0].path)
@@ -504,7 +387,18 @@ $ul.find('li').sort(function (a, b) {
 
               fs.readdir(path, function(err, items) {
               var cList = $('#filelist');
-              items.sort();
+
+              //sort filelist array
+              items.sort(function(x,y){
+                var a = String(x).toUpperCase();
+                var b = String(y).toUpperCase();
+                if (a > b)
+                   return 1
+                if (a < b)
+                   return -1
+                return 0;
+              });
+
               $.each(items, function(i) {
                 if (items[i]!='.DS_Store'){
                   var li = $('<li/>')
@@ -551,11 +445,10 @@ $ul.find('li').sort(function (a, b) {
               })
 
               watcher.on('create', function(file, stats) {
-                  console.log(file + ' was created')
+                  //console.log(file + ' was created')
 
+                  //add new file to #filelist
                   var filename= file.split('\\').pop().split('/').pop();
-
-
                   var li = $('<li/>')
                   .addClass('ui-widget-content')
                   .appendTo('#filelist');
@@ -565,12 +458,16 @@ $ul.find('li').sort(function (a, b) {
                   .appendTo(li);
                   sortUL("#filelist");
 
+                  //select line in filelist
+                  //$("li:contains('" + filename + "')").addClass("ui-selected");
+                  //alert($("#filelist")[0].selectedIndex)
               })
 
+/*
               watcher.on('change', function(file, stats) {
                 console.log(file + ' was changed')
               })
-
+*/
 
               // Unwatch specific files or directories.
               //watcher.unwatch('/tmp/another_file')

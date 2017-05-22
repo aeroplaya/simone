@@ -25,7 +25,7 @@ function createMainWindow () {
   var dimensions = mainScreen.size;
 
   // Create the browser window.
-  mainWindow = new BrowserWindow({width: 800, height: 723,
+  mainWindow = new BrowserWindow({width: 800, height: 695,
     transparent: false,frame: true,toolbar: true,resizable: true,titleBarStyle:'default',type:'textured',kiosk: false,acceptFirstMouse: false})
 
   mainWindow.setPosition(dimensions.width-800, 1)
@@ -34,7 +34,7 @@ function createMainWindow () {
   mainWindow.loadURL(`file://${__dirname}/main.html`)
 
   // Open the DevTools.
-  //mainWindow.webContents.openDevTools()
+  mainWindow.webContents.openDevTools()
 
   // Emitted when the window is closed.
   mainWindow.on('closed', function () {
@@ -64,7 +64,7 @@ function createDropWindow () {
   dropWindow.loadURL(`file://${__dirname}/drop.html`)
 
   // Open the DevTools.
-  //dropWindow.webContents.openDevTools()
+  dropWindow.webContents.openDevTools()
 
   // Emitted when the window is closed.
   dropWindow.on('closed', function () {
