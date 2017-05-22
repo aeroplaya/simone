@@ -293,9 +293,15 @@ var selindex = null;
       shell.openItem(path.join(folderpath, filename));
     });
 
-    //Trap arrows + shift-space
+    //Trap arrows + shift-space + enter
     $(document).keydown(function(e) {
       if ((e.which==32)&&(e.shiftKey)) {e.preventDefault();$('#search').val('');$("#search").focus();}
+      if ((e.which==13)&&($("#search").is(":focus"))) {
+        e.preventDefault();
+        alert($("#search").val());
+        //$('#filelist li:contains("cars")').css( "color", "red" );
+        $('#search').val('');
+      }
       if ($("#search").is(":focus")) {
         switch(e.which) {
             case 37: // left
