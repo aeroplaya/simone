@@ -260,6 +260,12 @@ var selindex = null;
   //JQUERY initialization
   $( function() {
 
+    //custom selectors
+    jQuery.expr[':'].icontains = function(a, i, m) {
+      return jQuery(a).text().toUpperCase()
+      .indexOf(m[3].toUpperCase()) >= 0;
+    };
+
     //load OS logo
     switch(process.platform) {
       case "darwin":
@@ -298,8 +304,17 @@ var selindex = null;
       if ((e.which==32)&&(e.shiftKey)) {e.preventDefault();$('#search').val('');$("#search").focus();}
       if ((e.which==13)&&($("#search").is(":focus"))) {
         e.preventDefault();
-        alert($("#search").val());
-        //$('#filelist li:contains("cars")').css( "color", "red" );
+        //alert($("#search").val());
+        var findval = $("#search").val();
+        $( "#filelist li" ).removeClass("ui-selected");
+
+        var findlen=$( "ol li:icontains('"+findval+"')" ).length;
+        if (findlen==1)
+        {
+          $( "ol li:icontains('"+findval+"')" ).addClass("ui-selected");
+        } else {
+          beep();
+        }
         $('#search').val('');
       }
       if ($("#search").is(":focus")) {
@@ -348,6 +363,11 @@ function sortUL(selector) {
       return (upA < upB) ? -1 : (upA > upB) ? 1 : 0;
   }).appendTo(selector);
 };
+
+function beep() {
+  var snd = new Audio("assets/audio/beep.wav");
+  snd.play();
+}
 
 //node.js
 var fs = require("fs");
