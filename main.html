@@ -284,8 +284,7 @@ var selindex = null;
     //click on filelist item
     $(function () {
       $('#filelist').on('click', 'li', function () {
-        document.getElementById('selectedItem').innerHTML=$(this).text();
-        selindex = $(this).parent().children().index(this);
+        populate();
         //alert("You clicked item " + selindex);
       });
     });
@@ -299,24 +298,29 @@ var selindex = null;
       shell.openItem(path.join(folderpath, filename));
     });
 
-    //Trap arrows + shift-space + enter
+    //Trap keys
     $(document).keydown(function(e) {
+      //Trap shift+space
       if ((e.which==32)&&(e.shiftKey)) {e.preventDefault();$('#search').val('');$("#search").focus();}
+
+      //Trap enter on search input then search
       if ((e.which==13)&&($("#search").is(":focus"))) {
         e.preventDefault();
-        //alert($("#search").val());
         var findval = $("#search").val();
         $( "#filelist li" ).removeClass("ui-selected");
-
+        //how many results?
         var findlen=$( "ol li:icontains('"+findval+"')" ).length;
-        if (findlen==1)
-        {
+        if (findlen==1) {
           $( "ol li:icontains('"+findval+"')" ).addClass("ui-selected");
+          populate();
         } else {
           beep();
         }
+        //clear search criteria
         $('#search').val('');
       }
+
+      //Trap arrow keys
       if ($("#search").is(":focus")) {
         switch(e.which) {
             case 37: // left
@@ -338,7 +342,6 @@ var selindex = null;
       }
     });
 
-
     //initialize widgets
     $( "#filelist" ).selectable();
     $( ".check" ).checkboxradio();
@@ -346,9 +349,9 @@ var selindex = null;
     $( "#departments" ).tabs();
     $( ".directive" ).checkboxradio();
     var options = {url: "data/size.js"};
-    $("#sizebox").easyAutocomplete(options);
+      $("#sizebox").easyAutocomplete(options);
     var options = {url: "data/stock.js"};
-    $("#stockbox").easyAutocomplete(options);
+      $("#stockbox").easyAutocomplete(options);
 
 //end Jquery init
     });
@@ -369,8 +372,14 @@ function beep() {
   snd.play();
 }
 
+function populate() {
+  var selectedval = $(".ui-selected").text();
+  document.getElementById('selectedItem').innerHTML=selectedval;
+  //selindex = $(this).parent().children().index(this);
+}
+
 //node.js
-var fs = require("fs");
+var   fs = require("fs");
 
 
 //var sys = require('sys');
