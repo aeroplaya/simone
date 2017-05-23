@@ -115,7 +115,7 @@ padding-left:30px;
           <fieldset style="">
             <legend><b><span id="droppedFolder"><span style="color:green;">Drop folder here</span></span></b></legend>
             <input id="search" style="width:100%;" type="search" placeholder="Search" />
-            <div style="height:543px;overflow-y:scroll;">
+            <div id="listcontainer" style="height:543px;overflow-y:scroll;">
               <ol id="filelist" style="overflow:none;">
               </ol>
             </div>
@@ -326,19 +326,48 @@ var selindex = null;
             case 37: // left
               break;
             case 38: // up
-              alert("up arrow");
+            if($('.ui-selected').length == 0 || $('.ui-selected').prev().length == 0){
+               $('.us-selected').removeClass('ui-selected');
+               $('.last').addClass('ui-selected');
+               populate();
+
+               var $s = $('#listcontainer');
+               var optionTop = $s.find('.ui-selected').offset().top;
+               var selectTop = $s.offset().top;
+               $s.scrollTop($s.scrollTop() + (optionTop - selectTop));
+            }else{
+                $('.ui-selected').removeClass('ui-selected').prev().addClass('ui-selected');
+                populate();
+                var $s = $('#listcontainer');
+                var optionTop = $s.find('.ui-selected').offset().top;
+                var selectTop = $s.offset().top;
+                $s.scrollTop($s.scrollTop() + (optionTop - selectTop));
+            }
               break;
             case 39: // right
               break;
-            case 40: //
-              selindex++;
-              alert(selindex);
-              $( "li:eq( "+(selindex-1)+" )" ).removeClass("ui-selected");
-              $( "li:eq( "+selindex+" )" ).addClass("ui-selected");
+            case 40: // down
+              if($('.ui-selected').length == 0 || $('.ui-selected').next().length == 0){
+                 $('.us-selected').removeClass('ui-selected');
+                 $('.first').addClass('ui-selected');
+                 populate();
+
+                 var $s = $('#listcontainer');
+                 var optionTop = $s.find('.ui-selected').offset().top;
+                 var selectTop = $s.offset().top;
+                 $s.scrollTop($s.scrollTop() + (optionTop - selectTop));
+              }else{
+                  $('.ui-selected').removeClass('ui-selected').next().addClass('ui-selected');
+                  populate();
+                  var $s = $('#listcontainer');
+                  var optionTop = $s.find('.ui-selected').offset().top;
+                  var selectTop = $s.offset().top;
+                  $s.scrollTop($s.scrollTop() + (optionTop - selectTop));
+              }
               break;
             default: return; // exit this handler for other keys
         }
-        e.preventDefault(); // prevent the default action (scroll / move caret)
+      //  e.preventDefault(); // prevent the default action (scroll / move caret)
       }
     });
 
