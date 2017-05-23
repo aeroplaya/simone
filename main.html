@@ -327,42 +327,40 @@ var selindex = null;
               break;
             case 38: // up
             if($('.ui-selected').length == 0 || $('.ui-selected').prev().length == 0){
-               $('.us-selected').removeClass('ui-selected');
-               $('.last').addClass('ui-selected');
-               populate();
-
+               $('.ui-selected').removeClass('ui-selected');
+               $('#filelist li:last').addClass('ui-selected');
                var $s = $('#listcontainer');
                var optionTop = $s.find('.ui-selected').offset().top;
                var selectTop = $s.offset().top;
                $s.scrollTop($s.scrollTop() + (optionTop - selectTop));
+               populate();
             }else{
                 $('.ui-selected').removeClass('ui-selected').prev().addClass('ui-selected');
-                populate();
                 var $s = $('#listcontainer');
                 var optionTop = $s.find('.ui-selected').offset().top;
                 var selectTop = $s.offset().top;
                 $s.scrollTop($s.scrollTop() + (optionTop - selectTop));
+                populate();
             }
               break;
             case 39: // right
               break;
             case 40: // down
               if($('.ui-selected').length == 0 || $('.ui-selected').next().length == 0){
-                 $('.us-selected').removeClass('ui-selected');
-                 $('.first').addClass('ui-selected');
-                 populate();
-
+                 $('.ui-selected').removeClass('ui-selected');
+                 $('#filelist li:first').addClass('ui-selected');
                  var $s = $('#listcontainer');
                  var optionTop = $s.find('.ui-selected').offset().top;
                  var selectTop = $s.offset().top;
                  $s.scrollTop($s.scrollTop() + (optionTop - selectTop));
+                 populate();
               }else{
                   $('.ui-selected').removeClass('ui-selected').next().addClass('ui-selected');
-                  populate();
                   var $s = $('#listcontainer');
                   var optionTop = $s.find('.ui-selected').offset().top;
                   var selectTop = $s.offset().top;
                   $s.scrollTop($s.scrollTop() + (optionTop - selectTop));
+                  populate();
               }
               break;
             default: return; // exit this handler for other keys
