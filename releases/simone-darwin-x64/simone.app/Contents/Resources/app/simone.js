@@ -25,10 +25,10 @@ function createMainWindow () {
   var dimensions = mainScreen.size;
 
   // Create the browser window.
-  mainWindow = new BrowserWindow({width: 800, height: 720,
+  mainWindow = new BrowserWindow({width: 860, height: 830,
     transparent: false,frame: true,toolbar: true,resizable: true,titleBarStyle:'default',type:'textured',kiosk: false,acceptFirstMouse: false})
 
-  mainWindow.setPosition(dimensions.width-800, 1)
+  mainWindow.setPosition(dimensions.width-860, 1)
 
   // and load the index.html of the app.
   mainWindow.loadURL(`file://${__dirname}/main.html`)
