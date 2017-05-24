@@ -88,9 +88,24 @@ text-shadow: 1px 2px 0px rgba(255,255,255,.5); /* 50% white from bottom */
   padding:2px;
   margin:2px;
 }
+
 .small {
    font-size: .675em !important;
 }
+.smaller {
+   font-size: .6em !important;
+}
+.smallest {
+   font-size: .55em !important;
+}
+.dash{
+  border: 0 none;
+  border-top: 1px dashed #888;
+
+  background: none;
+  height:0;
+}
+
 #search {
   background: url(assets/images/magnify.png) no-repeat scroll 2px 2px;
 padding-left:30px;
@@ -115,7 +130,7 @@ padding-left:30px;
           <fieldset style="">
             <legend><b><span id="droppedFolder"><span style="color:green;">Drop folder here</span></span></b></legend>
             <input id="search" style="width:100%;" type="search" placeholder="Search" />
-            <div id="listcontainer" style="height:580px;overflow-y:scroll;">
+            <div id="listcontainer" style="height:687px;overflow-y:scroll;">
               <ol id="filelist" style="overflow:none;">
               </ol>
             </div>
@@ -124,7 +139,10 @@ padding-left:30px;
         </div>
         <div class="details">
           <fieldset style="height:100%;">
-            <legend><textarea class="ui-corner-all" rows="2" style="background:#F2F5F7; margin-top:10px; width:500px; resize:none; font-size:.7em; color:#6997E0;" id="selectedItem">No file</textarea></legend>
+            <legend><textarea class="ui-corner-all" rows="2" style="    border: 2px solid;
+                border-style: groove;
+                border-radius: 8px;
+background:#F2F5F7; margin-top:10px; width:570px; resize:none; font-size:.7em; color:#6997E0;" id="selectedItem">No file</textarea></legend>
             <table width="100%"><tr>
               <td><table width="100%">
                 <tr>
@@ -171,7 +189,9 @@ padding-left:30px;
                 <label class="small" for="urgent" style="color:rgba(204,102,0,1);">URGENT</label>
                   <input class="check" type="radio" name="urgent" id="urgent" >
                 <label class="small" for="priority">Priority</label>
-                  <input class="check" type="radio" name="priority" id="priority" >
+                  <input class="check" type="checkbox" name="priority" id="priority" >
+                <label class="small" for="reprint" style="color:rgba(204,102,0,1);">RePrint</label>
+                  <input class="check" type="checkbox" name="reprint" id="reprint" >
               </fieldset>
               <fieldset class="fieldsetsmall"><legend class="small">Press</legend>
                 <label class="small" for="onesided" style="">One Sided</label>
@@ -180,52 +200,85 @@ padding-left:30px;
                   <input class="check" type="checkbox" name="pressperf" id="pressperf">
                 <label class="small" for="noaq" style="">NoAQ</label>
                   <input class="check" type="checkbox" name="noaq" id="noaq">
-                <label class="small" for="glossaq" style="">GlossAQ</label>
-                  <input class="check" type="checkbox" name="glossaq" id="glossaq">
-                <label class="small" for="matteaq" style="">MatteAQ</label>
-                  <input class="check" type="checkbox" name="matteaq" id="matteaq">
-                <label class="small" for="silkaq" style="">SilkAQ</label>
-                  <input class="check" type="checkbox" name="silkaq" id="silkaq">
-                <label class="small" for="softtouch" style="">SoftTouch</label>
-                  <input class="check" type="checkbox" name="softtouch" id="softtouch">
                 <label class="small" for="spotgloss" style="">Spot-Gloss</label>
-                  <input class="check" type="checkbox" name="spotgloss" id="spotgloss">
+                  <input class="check" type="checkbox" name="spotgloss" id="spotgloss"><br />
+                <label class="small" for="glossaq" style="">GlossAQ</label>
+                  <input class="check" type="radio" name="glossaq" id="glossaq">
+                <label class="small" for="matteaq" style="">MatteAQ</label>
+                  <input class="check" type="radio" name="matteaq" id="matteaq">
+                <label class="small" for="silkaq" style="">SilkAQ</label>
+                  <input class="check" type="radio" name="silkaq" id="silkaq">
+                <label class="small" for="softtouch" style="">SoftTouch</label>
+                  <input class="check" type="radio" name="softtouch" id="softtouch">
               </fieldset>
               <fieldset class="fieldsetsmall"><legend class="small">Post-Press</legend>
-                <label class="small" for="machinefold" style="">Machine Fold</label>
-                  <input class="check" type="checkbox" name="machinefold" id="machinefold">
-                <label class="small" for="duplo" style="">Duplo</label>
-                  <input class="check" type="checkbox" name="duplo" id="duplo">
-                <label class="small" for="uv" style="">UV</label>
+                <label class="smaller" for="uv" style="">UV</label>
                   <input class="check" type="checkbox" name="uv" id="uv">
-                <label class="small" for="glosslaminate" style="">Gloss Laminate</label>
-                  <input class="check" type="checkbox" name="glosslaminate" id="glosslaminate">
-                <label class="small" for="mattelaminate" style="">Matte Laminate</label>
-                  <input class="check" type="checkbox" name="mattelaminate" id="mattelaminate">
-                <label class="small" for="diecut" style="">Die Cut</label>
+                <label class="smaller" for="diecut" style="">Die Cut</label>
                   <input class="check" type="checkbox" name="diecut" id="diecut">
-                <label class="small" for="score" style="">Score</label>
-                  <input class="check" type="checkbox" name="score" id="score">
-                <label class="small" for="perf" style="">Perf</label>
-                  <input class="check" type="checkbox" name="perf" id="perf">
-                <label class="small" for="foil" style="">Foil</label>
-                  <input class="check" type="checkbox" name="foil" id="foil">
-                <label class="small" for="emboss" style="">Emboss</label>
-                  <input class="check" type="checkbox" name="emboss" id="emboss">
-                <label class="small" for="numbering" style="">Numbering</label>
-                  <input class="check" type="checkbox" name="numbering" id="numbering">
-                <label class="small" for="roundedcorners" style="">Rounded Corners</label>
+                <label class="smaller" for="roundedcorners" style="">Rounded Corners</label>
                   <input class="check" type="checkbox" name="roundedcorners" id="roundedcorners">
-                <label class="small" for="drill" style="">Drill</label>
+                <label class="smaller" for="score" style="">Score</label>
+                  <input class="check" type="checkbox" name="score" id="score">
+                <label class="smaller" for="foil" style="">Foil</label>
+                  <input class="check" type="checkbox" name="foil" id="foil">
+                <label class="smaller" for="emboss" style="">Emboss</label>
+                  <input class="check" type="checkbox" name="emboss" id="emboss">
+                <label class="smaller" for="perf" style="">Perf</label>
+                  <input class="check" type="checkbox" name="perf" id="perf">
+                <label class="smaller" for="drill" style="">Drill</label>
                   <input class="check" type="checkbox" name="drill" id="drill">
-<label class="small" for="handfold" style="">Hand Fold</label>
-<input class="check" type="checkbox" name="handfold" id="handfold">
-<label class="small" for="slipsheet" style="">Slip Sheet</label>
-<input class="check" type="checkbox" name="slipsheet" id="slipsheet">
-<label class="small" for="pad" style="">Pad</label>
-<input class="check" type="checkbox" name="pad" id="pad">
-<label class="small" for="glue" style="">Glue</label>
-<input class="check" type="checkbox" name="glue" id="glue">
+                <label class="smaller" for="numbering" style="">Numbering</label>
+                  <input class="check" type="checkbox" name="numbering" id="numbering">
+                <label class="smaller" for="slipsheet" style="">Slip Sheet</label>
+                  <input class="check" type="checkbox" name="slipsheet" id="slipsheet">
+                <label class="smaller" for="pad" style="">Pad</label>
+                  <input class="check" type="checkbox" name="pad" id="pad">
+                <label class="smaller" for="glue" style="">Glue</label>
+                  <input class="check" type="checkbox" name="glue" id="glue">
+                <hr />
+                <label class="smallest" for="flat" style="">Flat</label>
+                  <input class="check" type="radio" name="flat" id="flat">
+                <label class="smallest" for="rollfold" style="">Roll Fold</label>
+                  <input class="check" type="radio" name="rollfold" id="rollfold">
+                <label class="smallest" for="zfold" style="">Z Fold</label>
+                  <input class="check" type="radio" name="zfold" id="zfold">
+                <label class="smallest" for="dpfold" style="">Double Parallel Fold</label>
+                  <input class="check" type="radio" name="dpfold" id="dpfold">
+                <label class="smallest" for="halffold" style="">Half Fold</label>
+                  <input class="check" type="radio" name="halffold" id="halffold">
+                <label class="smallest" for="gatefold" style="">Gate Fold</label>
+                  <input class="check" type="radio" name="gatefold" id="gatefold">
+                <label class="smallest" for="dgatefold" style="">Double Gate Fold</label>
+                  <input class="check" type="radio" name="dgatefold" id="dgatefold">
+                <label class="smallest" for="fourfold" style="">Four Fold</label>
+                  <input class="check" type="radio" name="fourfold" id="fourfold">
+                <label class="smallest" for="accordianfold" style="">Accordian Fold</label>
+                  <input class="check" type="radio" name="accordianfold" id="accordianfold">
+                <label class="smallest" for="handfold" style="color:rgba(204,102,0,1);">Hand Fold</label>
+                  <input class="check" type="checkbox" name="handfold" id="handfold">
+                <hr class="dash" />
+                <label class="smallest" for="ssself" style="">SS Self Cover</label>
+                  <input class="check" type="radio" name="ssself" id="ssself">
+                <label class="smallest" for="sscover" style="">SS Cover</label>
+                  <input class="check" type="radio" name="sscover" id="sscover">
+                <label class="smallest" for="sscontent" style="">SS Content</label>
+                  <input class="check" type="radio" name="sscontent" id="sscontent">
+                <label class="smallest" for="perfect" style="">Perfect Bound</label>
+                  <input class="check" type="radio" name="perfect" id="perfect">
+                <label class="smallest" for="coil" style="">Coil Bound</label>
+                  <input class="check" type="radio" name="coil" id="coil">
+
+
+                <hr />
+                <label class="smallest" for="bun50" style="">Bundle 50s</label>
+                  <input class="check" type="radio" name="bun50" id="bun50">
+                <label class="smallest" for="bun100" style="">Bundle 100s</label>
+                  <input class="check" type="radio" name="bun100" id="bun100">
+                <label class="smallest" for="xbun50" style="">X-Bundle 50s</label>
+                  <input class="check" type="radio" name="xbun50" id="xbun50">
+                <label class="smallest" for="xbun100" style="">X-Bundle 100s</label>
+                  <input class="check" type="radio" name="xbun100" id="xbun100">
 
                 </fieldset>
                 </center>
