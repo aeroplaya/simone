@@ -130,7 +130,7 @@ padding-left:30px;
           <fieldset style="">
             <legend><b><span id="droppedFolder"><span style="color:green;">Drop folder here</span></span></b></legend>
             <input id="search" style="width:100%;" type="search" placeholder="Search" />
-            <div id="listcontainer" style="height:687px;overflow-y:scroll;">
+            <div id="listcontainer" style="height:708px;overflow-y:scroll;">
               <ol id="filelist" style="overflow:none;">
               </ol>
             </div>
@@ -170,24 +170,26 @@ background:#F2F5F7; margin-top:10px; width:570px; resize:none; font-size:.7em; c
               </td><td width="160px;" style="border-style: solid; border:0px;
     border-left: 1px groove;text-align:center;">
                 <label class="small" for="po" style="width:79%;">Hold: PO</label>
-                <input class="directive" type="radio" name="po" id="po">
+                <input class="directive" type="radio" name="hold" value="po" id="po">
                 <label class="small" for="approval" style="width:79%;">Hold: Approval</label>
-                <input class="directive" type="radio" name="approval" id="approval">
+                <input class="directive" type="radio" name="hold" value="approval" id="approval">
                 <label class="small" for="newfile" style="width:79%;">Hold: New File</label>
-                <input class="directive" type="radio" name="newfile" id="newfile">
+                <input class="directive" type="radio" name="hold" value="newfile" id="newfile">
                 <button style="width:98%;margin-top:20px;" class="ui-button ui-widget ui-corner-all small">Cancel Order</button><br />
-                <button style="width:98%;;margin-top:10px;" class="ui-button ui-widget ui-corner-all small">Commit Order</button>
+                <button style="width:98%;margin-top:10px;" class="ui-button ui-widget ui-corner-all small">Commit Order</button>
               </td></tr></table>
 
               <center>
               <hr>
+              <button style="width:98%;margin:-30px 0px -20px 0px;" class="ui-button ui-widget ui-corner-all smallest">Clear all job attributes</button>
+
               <fieldset class="fieldsetsmall"><legend class="small">Priority</legend>
                 <label class="small" for="normal">Normal</label>
-                  <input class="check" type="radio" name="normal" id="normal" >
+                  <input class="check" type="radio" name="priority" value="normal" id="normal" >
                 <label class="small" for="sameday" style="color:rgba(153,0,51,1);">Same Day</label>
-                  <input class="check sameday" type="radio" name="sameday" id="sameday" >
+                  <input class="check sameday" type="radio" name="priority" value="sameday" id="sameday" >
                 <label class="small" for="urgent" style="color:rgba(204,102,0,1);">URGENT</label>
-                  <input class="check" type="radio" name="urgent" id="urgent" >
+                  <input class="check" type="radio" name="priority" value="urgent" id="urgent" >
                 <label class="small" for="priority">Priority</label>
                   <input class="check" type="checkbox" name="priority" id="priority" >
                 <label class="small" for="reprint" style="color:rgba(204,102,0,1);">RePrint</label>
@@ -203,13 +205,13 @@ background:#F2F5F7; margin-top:10px; width:570px; resize:none; font-size:.7em; c
                 <label class="small" for="spotgloss" style="">Spot-Gloss</label>
                   <input class="check" type="checkbox" name="spotgloss" id="spotgloss"><br />
                 <label class="small" for="glossaq" style="">GlossAQ</label>
-                  <input class="check" type="radio" name="glossaq" id="glossaq">
+                  <input class="check" type="radio" name="aq" id="glossaq">
                 <label class="small" for="matteaq" style="">MatteAQ</label>
-                  <input class="check" type="radio" name="matteaq" id="matteaq">
+                  <input class="check" type="radio" name="aq" id="matteaq">
                 <label class="small" for="silkaq" style="">SilkAQ</label>
-                  <input class="check" type="radio" name="silkaq" id="silkaq">
+                  <input class="check" type="radio" name="aq" id="silkaq">
                 <label class="small" for="softtouch" style="">SoftTouch</label>
-                  <input class="check" type="radio" name="softtouch" id="softtouch">
+                  <input class="check" type="radio" name="aq" id="softtouch">
               </fieldset>
               <fieldset class="fieldsetsmall"><legend class="small">Post-Press</legend>
                 <label class="smaller" for="uv" style="">UV</label>
@@ -237,51 +239,51 @@ background:#F2F5F7; margin-top:10px; width:570px; resize:none; font-size:.7em; c
                 <label class="smaller" for="glue" style="">Glue</label>
                   <input class="check" type="checkbox" name="glue" id="glue">
                 <hr />
+                <label class="smallest" for="nobun" style="">No Bundle</label>
+                  <input class="check" type="radio" name="bundle" id="nobun">
+                <label class="smallest" for="bun50" style="">Bundle 50s</label>
+                  <input class="check" type="radio" name="bundle" id="bun50">
+                <label class="smallest" for="bun100" style="">Bundle 100s</label>
+                  <input class="check" type="radio" name="bundle" id="bun100">
+                <label class="smallest" for="xbun50" style="">X-Bundle 50s</label>
+                  <input class="check" type="radio" name="bundle" id="xbun50">
+                <label class="smallest" for="xbun100" style="">X-Bundle 100s</label>
+                  <input class="check" type="radio" name="bundle" id="xbun100">
+
+                <hr />
                 <label class="smallest" for="flat" style="">Flat</label>
-                  <input class="check" type="radio" name="flat" id="flat">
+                  <input class="check" type="radio" name="foldbind" id="flat">
                 <label class="smallest" for="rollfold" style="">Roll Fold</label>
-                  <input class="check" type="radio" name="rollfold" id="rollfold">
+                  <input class="check" type="radio" name="foldbind" id="rollfold">
                 <label class="smallest" for="zfold" style="">Z Fold</label>
-                  <input class="check" type="radio" name="zfold" id="zfold">
+                  <input class="check" type="radio" name="foldbind" id="zfold">
                 <label class="smallest" for="dpfold" style="">Double Parallel Fold</label>
-                  <input class="check" type="radio" name="dpfold" id="dpfold">
+                  <input class="check" type="radio" name="foldbind" id="dpfold">
                 <label class="smallest" for="halffold" style="">Half Fold</label>
-                  <input class="check" type="radio" name="halffold" id="halffold">
+                  <input class="check" type="radio" name="foldbind" id="halffold">
                 <label class="smallest" for="gatefold" style="">Gate Fold</label>
-                  <input class="check" type="radio" name="gatefold" id="gatefold">
+                  <input class="check" type="radio" name="foldbind" id="gatefold">
                 <label class="smallest" for="dgatefold" style="">Double Gate Fold</label>
-                  <input class="check" type="radio" name="dgatefold" id="dgatefold">
+                  <input class="check" type="radio" name="foldbind" id="dgatefold">
                 <label class="smallest" for="fourfold" style="">Four Fold</label>
-                  <input class="check" type="radio" name="fourfold" id="fourfold">
+                  <input class="check" type="radio" name="foldbind" id="fourfold">
                 <label class="smallest" for="accordianfold" style="">Accordian Fold</label>
-                  <input class="check" type="radio" name="accordianfold" id="accordianfold">
+                  <input class="check" type="radio" name="foldbind" id="accordianfold">
                 <label class="smallest" for="handfold" style="color:rgba(204,102,0,1);">Hand Fold</label>
                   <input class="check" type="checkbox" name="handfold" id="handfold">
                 <hr class="dash" />
                 <label class="smallest" for="ssself" style="">SS Self Cover</label>
-                  <input class="check" type="radio" name="ssself" id="ssself">
+                  <input class="check" type="radio" name="foldbind" id="ssself">
                 <label class="smallest" for="sscover" style="">SS Cover</label>
-                  <input class="check" type="radio" name="sscover" id="sscover">
+                  <input class="check" type="radio" name="foldbind" id="sscover">
                 <label class="smallest" for="sscontent" style="">SS Content</label>
-                  <input class="check" type="radio" name="sscontent" id="sscontent">
+                  <input class="check" type="radio" name="foldbind" id="sscontent">
                 <label class="smallest" for="perfect" style="">Perfect Bound</label>
-                  <input class="check" type="radio" name="perfect" id="perfect">
+                  <input class="check" type="radio" name="foldbind" id="perfect">
                 <label class="smallest" for="coil" style="">Coil Bound</label>
-                  <input class="check" type="radio" name="coil" id="coil">
-
-
-                <hr />
-                <label class="smallest" for="bun50" style="">Bundle 50s</label>
-                  <input class="check" type="radio" name="bun50" id="bun50">
-                <label class="smallest" for="bun100" style="">Bundle 100s</label>
-                  <input class="check" type="radio" name="bun100" id="bun100">
-                <label class="smallest" for="xbun50" style="">X-Bundle 50s</label>
-                  <input class="check" type="radio" name="xbun50" id="xbun50">
-                <label class="smallest" for="xbun100" style="">X-Bundle 100s</label>
-                  <input class="check" type="radio" name="xbun100" id="xbun100">
-
-                </fieldset>
-                </center>
+                  <input class="check" type="radio" name="foldbind" id="coil">
+              </fieldset>
+            </center>
           </ol>
           </fiesldset>
         </div>
