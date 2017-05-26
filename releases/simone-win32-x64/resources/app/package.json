@@ -1,0 +1,8 @@
+{
+  "name": "simone",
+  "version": "0.1.0",
+  "main": "simone.js",
+  "dependencies": {
+    "menubar": "^5.2.3"
+  }
+}
