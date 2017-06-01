@@ -466,7 +466,7 @@ function sortUL(selector) {
 };
 
 function beep() {
-  var snd = new Audio("assets/audio/beep.wav");
+  var snd = new Audio("assets/audio/tone.wav");
   snd.play();
 }
 
@@ -537,7 +537,8 @@ document.ondragover = document.ondrop = (ev) => {
 
               $.each(items, function(i) {
 
-                if (items[i].indexOf('DS_Store')==-1){
+                //load file in list if not begin with .
+                if (items[i].indexOf('.')!=0) {
                   var li = $('<li/>')
                   .addClass('ui-widget-content')
                   .appendTo(cList);
