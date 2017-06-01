@@ -347,12 +347,26 @@ var selindex = null;
     });
 
     //doubleclick on filelist item
-    $(document).on('dblclick', '#filelist li', function(){
-      $(this).css('font-weight', 'bold');
+    $(document).on('dblclick', '#filelist li', function(evt){
+
       var filename=$(this).text();
       const shell = require('electron').shell;
       const path = require('path');
-      shell.openItem(path.join(folderpath, filename));
+
+      //if altkey down show file in OS otherwise open file
+      if (evt.altKey) {
+        shell.showItemInFolder(path.join(folderpath, filename));
+      } else {
+        $(this).css('font-weight', 'bold');
+        shell.openItem(path.join(folderpath, filename));
+      }
+
+      //open file in os native app
+      //shell.openItem(path.join(folderpath, filename));
+
+      //show file in OS
+      //shell.showItemInFolder(path.join(folderpath, filename));
+
     });
 
     //Trap keys
