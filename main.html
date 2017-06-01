@@ -89,6 +89,9 @@ text-shadow: 1px 2px 0px rgba(255,255,255,.5); /* 50% white from bottom */
   margin:2px;
 }
 
+.medium {
+   font-size: .8em !important;
+}
 .small {
    font-size: .675em !important;
 }
@@ -116,15 +119,14 @@ padding-left:30px;
   <body id="departments" >
     <div >
       <ul style="clear:right;">
-        <li><a href="#prepress">Prepress</a></li>
-        <li><a href="#digital">Digital</a></li>
-        <li><a href="#signs">Signs</a></li>
-        <li><a href="#csr">CSR</a></li>
-        <li><a href="#estimating">Estimating</a></li>
+        <li style="margin-top: 1em;" class="medium"><a href="#toprep">Jobs To Prep (0)</a></li>
+        <li style="margin-top: 1em;" class="medium"><a href="#uploadedart">Uploaded Art (0)</a></li>
+        <li style="margin-top: 1em;" class="medium"><a href="#hold">Jobs on Hold (0)</a></li>
+        <li style="margin-top: 1em;" class="medium"><a href="#cancelled">Cancelled jobs (0)</a></li>
         <img id="logo" src="assets/images/simone.png" style="float: right;margin:0px;height:42px;-webkit-filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.8))" />
 
   </ul>
-  <div id="prepress" style="margin:0;padding:0;">
+  <div id="toprep" style="margin:0;padding:0;">
       <div class="container">
         <div class="files">
           <fieldset style="">
@@ -289,17 +291,14 @@ background:#F2F5F7; margin-top:10px; width:570px; resize:none; font-size:.7em; c
         </div>
     </div>
   </div>
-      <div id="digital">
-        <p>Digital dashboard</p>
+      <div id="hold">
+        <p>Jobs on Hold</p>
       </div>
-      <div id="signs">
-        <p>Signs Dasboard</p>
+      <div id="waitnewf">
+        <p>Jobs waiting for new files</p>
       </div>
-      <div id="csr">
-        <p>CSR Dasboard</p>
-      </div>
-      <div id="estimating">
-        <p>Estimating Dasboard</p>
+      <div id="uploadedart">
+        <p>Uploaded files</p>
       </div>
 
   </div>
@@ -548,6 +547,8 @@ document.ondragover = document.ondrop = (ev) => {
                   .appendTo(li);
                 }
                 });
+
+                $('a[href$="#toprep"]').text('To Prep ('+$('#filelist li').length+')');
 
               });
 
