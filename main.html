@@ -109,6 +109,10 @@ text-shadow: 1px 2px 0px rgba(255,255,255,.5); /* 50% white from bottom */
   height:0;
 }
 
+.dlg-no-title .ui-dialog-titlebar {
+			display: none;
+		}
+
 #search {
   background: url(assets/images/magnify.png) no-repeat scroll 2px 2px;
 padding-left:30px;
@@ -133,7 +137,7 @@ padding-left:30px;
             <legend><b><span id="droppedFolder"><span style="color:green;">Drop folder here</span></span></b></legend>
             <input id="search" style="width:100%;" type="search" placeholder="Search" />
             <div id="listcontainer" style="height:708px;overflow-y:scroll;">
-              <ol id="filelist" style="overflow:none;">
+              <ol tabindex="-1" id="filelist" style="overflow:none;">
               </ol>
             </div>
         </fiesldset>
@@ -299,12 +303,20 @@ background:#F2F5F7; margin-top:10px; width:570px; resize:none; font-size:.7em; c
         <p>Jobs on Hold</p>
       </div>
       <div id="cancelled">
-        <p>Jobs waiting for new files</p>
+        <p>Cancelled jobs</p>
       </div>
 
 
   </div>
-
+  <div id="preferences">
+    <object data="cat.pdf" type="application/pdf" width="300" height="200">
+    alt : <a href="cat.pdf">test.pdf</a>
+    </object>
+  </div>
+  <div id="preview">
+    <p>Preview...
+    </p>
+  </div>
 
   </body>
   <script>
@@ -349,7 +361,6 @@ var selindex = null;
 
     //doubleclick on filelist item
     $(document).on('dblclick', '#filelist li', function(evt){
-
       var filename=$(this).text();
       const shell = require('electron').shell;
       const path = require('path');
@@ -361,17 +372,20 @@ var selindex = null;
         $(this).css('font-weight', 'bold');
         shell.openItem(path.join(folderpath, filename));
       }
-
-      //open file in os native app
-      //shell.openItem(path.join(folderpath, filename));
-
-      //show file in OS
-      //shell.showItemInFolder(path.join(folderpath, filename));
-
     });
 
     //Trap keys
     $(document).keydown(function(e) {
+
+      //trap spacebar preview toggle
+      if (($('#preview').is(":visible"))&&(e.which==32)) {
+        $('#preview').dialog('close'); return false;
+      }
+      if (( $(':input:focus').length == 0)&&(e.which==32)&&$("#filelist").find('.ui-selected').length==1) {
+        $("#preview").dialog("open"); return false;
+      }
+
+
       //Trap shift+space
       if ((e.which==32)&&(e.altKey)) {e.preventDefault();$('#search').val('');$("#search").focus();}
 
@@ -447,10 +461,27 @@ var selindex = null;
     $( "#droppedqty" ).spinner({ step: 50 });
     $( "#departments" ).tabs();
     $( ".directive" ).checkboxradio();
-    var options = {url: "data/size.js"};
-      $("#sizebox").easyAutocomplete(options);
-    var options = {url: "data/stock.js"};
-      $("#stockbox").easyAutocomplete(options);
+      var options = {url: "data/size.js"};
+    $("#sizebox").easyAutocomplete(options);
+      var options = {url: "data/stock.js"};
+    $("#stockbox").easyAutocomplete(options);
+    $("#preferences").dialog({
+    	autoOpen: false,
+      title: "Preferences",
+    	modal: true,
+    	dialogClass: "zdlg-no-title",
+      width: 500,
+      height: 500
+    });
+    $("#preview").dialog({
+      autoOpen: false,
+      title: "Preview",
+      modal: true,
+      dialogClass: "dlg-no-title",
+      width: 500,
+      height: 500
+    });
+
 
 //end Jquery init
     });

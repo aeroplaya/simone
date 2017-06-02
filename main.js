@@ -4,7 +4,16 @@ const template = [
   {
     label: 'simone',
       submenu: [
-        {label: 'Preferences'},
+        {label: 'Preferences',
+        accelerator: 'CmdOrCtrl+P',
+          click: function () {
+            if(!$("#preferences").dialog("isOpen")) {
+              $("#preferences").dialog("open");
+            } else {
+              $("#preferences").dialog("close");
+            }
+          }
+        },
         {type: 'separator'},
         {label: 'Quit',
           accelerator: 'CmdOrCtrl+Q',
