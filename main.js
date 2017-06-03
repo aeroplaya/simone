@@ -9,8 +9,10 @@ const template = [
           click: function () {
             if(!$("#preferences").dialog("isOpen")) {
               $("#preferences").dialog("open");
+              return false;
             } else {
               $("#preferences").dialog("close");
+              return false;
             }
           }
         },
