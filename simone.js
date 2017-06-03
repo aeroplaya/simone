@@ -24,7 +24,7 @@ function createMainWindow () {
   var mainScreen = screenElectron.getPrimaryDisplay();
   var dimensions = mainScreen.size;
 
-  // Create the browser window.
+  // Create the browser windows.
   mainWindow = new BrowserWindow({width: 860, height: 855,
     transparent: false,frame: true,toolbar: true,resizable: true,titleBarStyle:'default',type:'textured',kiosk: false,acceptFirstMouse: false})
 
@@ -43,9 +43,16 @@ function createMainWindow () {
     // when you should delete the corresponding element.
     mainWindow = null
   })
+/*
+  preview = new BrowserWindow({width: 400, height: 600,
+    transparent: false,frame: false,show:false})
+
+  preview.setPosition(1, 1)
+*/
 }
 
-function createDropWindow () {
+/*
+function createPreview () {
   //get screen dimensions for window placement
   const electron = require('electron');
   var screenElectron = electron.screen;
@@ -54,34 +61,32 @@ function createDropWindow () {
   var mainScreen = screenElectron.getPrimaryDisplay();
   var dimensions = mainScreen.size;
 
-  // Create the browser window.
-  dropWindow = new BrowserWindow({width: 300, height: 300,
-    transparent: false,frame: true,toolbar: true,resizable: false,titleBarStyle:'default',type:'textured',kiosk: false,acceptFirstMouse: false})
+  // Create preview window.
+  previewWindow = new BrowserWindow({width: 400, height: 400,frame: false})
 
-  dropWindow.setPosition(1, 1)
+  previewWindow.setPosition(1, 160)
 
   // and load the index.html of the app.
-  dropWindow.loadURL(`file://${__dirname}/drop.html`)
+  previewWindow.loadURL(`file://${__dirname}/cars.pdf`)
 
   // Open the DevTools.
-  dropWindow.webContents.openDevTools()
+  //previewWindow.webContents.openDevTools()
 
   // Emitted when the window is closed.
-  dropWindow.on('closed', function () {
+  previewWindow.on('closed', function () {
     // Dereference the window object, usually you would store windows
     // in an array if your app supports multi windows, this is the time
     // when you should delete the corresponding element.
-    dropWindow = null
+    previewWindow = null
   })
 }
-
-
+*/
 
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
-app.on('ready', createMainWindow, createDropWindow)
+app.on('ready', createMainWindow)
 
 // Quit when all windows are closed.
 app.on('window-all-closed', function () {

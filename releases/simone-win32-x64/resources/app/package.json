@@ -4,5 +4,8 @@
   "main": "simone.js",
   "dependencies": {
     "menubar": "^5.2.3"
+  },
+  "devDependencies": {
+    "electron": "^1.6.10"
   }
 }

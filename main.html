@@ -314,8 +314,6 @@ background:#F2F5F7; margin-top:10px; width:570px; resize:none; font-size:.7em; c
     </object>
   </div>
   <div id="preview">
-    <p>Preview...
-    </p>
   </div>
 
   </body>
@@ -378,16 +376,38 @@ var selindex = null;
     $(document).keydown(function(e) {
 
       //trap spacebar preview toggle
-      if (($('#preview').is(":visible"))&&(e.which==32)) {
+      if (($('#preview').is(":visible"))&&(e.which==32)) {alert(e.shiftkey);
         $('#preview').dialog('close'); return false;
       }
-      if (( $(':input:focus').length == 0)&&(e.which==32)&&$("#filelist").find('.ui-selected').length==1) {
-        $("#preview").dialog("open"); return false;
+      if (( $(':input:focus').length == 0)&&(e.which==32)&&($("#filelist").find('.ui-selected').length==1)&&(e.shiftKey!=1)) {
+        //window.open('cars.pdf','NewWin','toolbar=no,status=no,left=0, top=0,width=400,height=600')
+
+                    //specify popunder window features
+                    //set 1 to enable a particular feature, 0 to disable
+                    function loadpreview()
+                    {
+                      const path = require('path');
+                      var filename=$("#filelist").find('.ui-selected').text();
+
+                      var file = path.join(folderpath, filename);
+                      var preview = window.open(path.join(folderpath, filename), "Preview", "left=10, top=150, width=400, height=500");
+
+
+                    // win2=window.open(popunder,"preview",winfeatures);
+                     //win2.moveTo(0, 0);
+                     preview.blur();
+                     window.focus();
+                    }
+
+                    loadpreview();
+
+      //  $("#preview embed").attr("src","cars.pdf");
+        //$("#preview").dialog("open"); return false;
       }
 
 
       //Trap shift+space
-      if ((e.which==32)&&(e.altKey)) {e.preventDefault();$('#search').val('');$("#search").focus();}
+      if ((e.which==32)&&(e.shiftKey)) {e.preventDefault();$('#search').val('');$("#search").focus();}
 
       //Trap enter on search input then search
       if ((e.which==13)&&($("#search").is(":focus"))) {
