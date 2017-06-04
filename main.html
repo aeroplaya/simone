@@ -9,11 +9,14 @@
     <link rel="stylesheet" href="assets/ui/jquery-ui.min.css" type="text/css" />
     <link rel="stylesheet" href="assets/ui/jquery-ui.theme.min.css" type="text/css" />
     <link rel="stylesheet" href="assets/js/easyautocomplete/easy-autocomplete.min.css" type="text/css" />
+    <link rel="stylesheet" href="assets/js/filestyle/jquery-filestyle.min.css" />
+
     <!-- Insert this line above script imports  -->
     <script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
     <script src="assets/js/jquery-3.2.1.min.js"></script>
     <script src="assets/ui/jquery-ui.min.js"></script>
     <script src="assets/js/easyautocomplete/jquery.easy-autocomplete.min.js"></script>
+    <script src="assets/js/filestyle/jquery-filestyle.min.js"></script>
 
     <!-- Insert this line after script imports -->
     <script>if (window.module) module = window.module;</script>
@@ -309,9 +312,40 @@ background:#F2F5F7; margin-top:10px; width:570px; resize:none; font-size:.7em; c
 
   </div>
   <div id="preferences">
-    <object data="cat.pdf" type="application/pdf" width="300" height="200">
-    alt : <a href="cat.pdf">test.pdf</a>
-    </object>
+    <center>
+      <table border="0" width="100%">
+        <tr>
+          <td style="font-size:.8em;">Jobs To Prep</td>
+          <td><input id="jobstoprepdir" class="jfilestyle" type="file" style="font-size:.6em;" data-buttonText="Choose Folder" webkitdirectory /></td>
+        </tr>
+        <tr>
+          <td style="font-size:.8em;">Uploaded Art</td>
+          <td><input id="uploadedartdir" class="jfilestyle" type="file" style="font-size:.6em;" data-buttonText="Choose Folder" webkitdirectory /></td>
+        </tr>
+        <tr>
+          <td style="font-size:.8em;">Jobs On Hold</td>
+          <td><input id="jobsonholddir" class="jfilestyle" type="file" style="font-size:.6em;" data-buttonText="Choose Folder" webkitdirectory /></td>
+        </tr>
+        <tr>
+          <td style="font-size:.8em;">Cancelled Jobs</td>
+          <td><input id="cancelledjobsdir" class="jfilestyle" type="file" style="font-size:.6em;" data-buttonText="Choose Folder" webkitdirectory /></td>
+        </tr>
+        <tr>
+          <td style="font-size:.8em;">Size defs</td>
+          <td><input id="sizedefs" class="jfilestyle" type="file" style="font-size:.6em;" data-buttonText="Choose File" data-buttonBefore="true" /></td>
+        </tr>
+        <tr>
+          <td style="font-size:.8em;">Stocks defs</td>
+          <td><input id="stockdefs" class="jfilestyle" type="file" style="font-size:.6em;" data-buttonText="Choose File" data-buttonBefore="true" /></td>
+        </tr>
+        <tr>
+          <td style="font-size:.8em;">Rules</td>
+          <td><input id="rules" class="jfilestyle" type="file" style="font-size:.6em;" data-buttonText="Choose File" data-buttonBefore="true" /></td>
+        </tr>
+
+      </table>
+    </center>
+
   </div>
   <div id="preview">
   </div>
@@ -491,7 +525,7 @@ var selindex = null;
     	modal: true,
     	dialogClass: "zdlg-no-title",
       width: 500,
-      height: 500
+      height: 395
     });
     $("#preview").dialog({
       autoOpen: false,
@@ -501,6 +535,42 @@ var selindex = null;
       width: 500,
       height: 500
     });
+
+    $('div#preferences').on('dialogclose', function(event) {
+      var prefs = [
+        "jobstoprepdir",
+        "uploadedartdir",
+        "jobsonholddir",
+        "cancelledjobsdir",
+        "sizedefs",
+        "stockdefs",
+        "rules"
+      ]
+
+
+      for (var i = 0, len = prefs.length; i < len; i++) {
+        //prefs[i]
+        if ($('#' + prefs[i]).val()!='') {
+          pvar=document.getElementById(prefs[i]).files[0].path
+          alert(pvar);
+        }
+
+      }
+
+      //jobstoprepdir=document.getElementById("jobstoprepdir").files[0].path
+      //uploadedartdir=document.getElementById("uploadedartdir").files[0].path
+      //jobsonholddir=document.getElementById("jobsonholddir").files[0].path
+      //cancelledjobsdir=document.getElementById("cancelledjobsdir").files[0].path
+      //sizedefs=document.getElementById("sizedefs").files[0].path
+      //stockdefs=document.getElementById("stockdefs").files[0].path
+
+    });
+
+    //initialze preferences
+
+//    var jtpd = store.get('configName');
+  //alert(jtpd);
+
 
 
 //end Jquery init
