@@ -547,23 +547,17 @@ var selindex = null;
         "rules"
       ]
 
+      const Store = require('electron-store');
+      const store = new Store();
 
       for (var i = 0, len = prefs.length; i < len; i++) {
         //prefs[i]
         if ($('#' + prefs[i]).val()!='') {
-          pvar=document.getElementById(prefs[i]).files[0].path
-          alert(pvar);
+          pvar=document.getElementById(prefs[i]).files[0].path;
+          store.set(prefs[i], pvar);
+          console.log(store.get(prefs[i]));
         }
-
       }
-
-      //jobstoprepdir=document.getElementById("jobstoprepdir").files[0].path
-      //uploadedartdir=document.getElementById("uploadedartdir").files[0].path
-      //jobsonholddir=document.getElementById("jobsonholddir").files[0].path
-      //cancelledjobsdir=document.getElementById("cancelledjobsdir").files[0].path
-      //sizedefs=document.getElementById("sizedefs").files[0].path
-      //stockdefs=document.getElementById("stockdefs").files[0].path
-
     });
 
     //initialze preferences
@@ -752,7 +746,6 @@ document.ondragover = document.ondrop = (ev) => {
         });
       ev.preventDefault()
     }
-
 
 
   </script>

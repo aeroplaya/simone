@@ -34,7 +34,7 @@ function createMainWindow () {
   mainWindow.loadURL(`file://${__dirname}/main.html`)
 
   // Open the DevTools.
-  //mainWindow.webContents.openDevTools()
+  mainWindow.webContents.openDevTools()
 
   // Emitted when the window is closed.
   mainWindow.on('closed', function () {
@@ -98,6 +98,8 @@ app.on('window-all-closed', function () {
 })
 
 app.on('activate', function () {
+
+
   // On OS X it's common to re-create a window in the app when the
   // dock icon is clicked and there are no other windows open.
   if (mainWindow === null) {

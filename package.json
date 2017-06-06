@@ -1,27 +1,24 @@
 {
-  "name": "simone",
-  "version": "0.1.0",
+  "name": "pgwPpFH",
+  "version": "0.6.5",
+  "description": "Prepress file handling",
   "private": true,
   "main": "simone.js",
   "dependencies": {
     "electron": "^1.7.2",
     "fs": "0.0.2",
     "menubar": "^5.2.3",
-    "path": "^0.12.7"
-    },
-  "devDependencies": {
-    "electron": "^1.7.2",
-    "fs": "0.0.2",
-    "menubar": "^5.2.3",
-    "path": "^0.12.7"
-    },
+    "path": "^0.12.7",
+    "electron-store": "^1.1.0"
+  },
+  "devDependencies": {},
   "scripts": {
     "package-mac": "electron-packager . --overwrite --platform=darwin --arch=x64 --icon=assets/icons/mac/pgwlogo.png.icns --prune=true --out=release-builds",
     "package-win": "electron-packager . --overwrite --asar=true --platform=win32 --arch=ia32 --icon=assets/icons/win/pgwlogo.png.ico --prune=true --out=release-builds --version-string.CompanyName=CE --version-string.FileDescription=CE --version-string.ProductName=\"PGW Prepress filehandler\"",
     "package-linux": "electron-packager . --overwrite --platform=linux --arch=x64 --icon=assets/icons/png/pgwlogo.png_512x512.png --prune=true --out=release-builds"
-    },
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/aeroplaya/simone"
-    }
+  }
 }

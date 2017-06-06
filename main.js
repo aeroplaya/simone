@@ -2,13 +2,32 @@ const {remote, ipcRenderer} = require('electron')
 const {Menu, MenuItem} = remote
 const template = [
   {
-    label: 'simone',
+    label: 'Options',
       submenu: [
         {label: 'Preferences',
         accelerator: 'CmdOrCtrl+P',
           click: function () {
             if(!$("#preferences").dialog("isOpen")) {
               $("#preferences").dialog("open");
+
+              const Store = require('electron-store');
+              const store = new Store();
+              var prefs =  ["jobstoprepdir", "uploadedartdir", "jobsonholddir", "cancelledjobsdir", "sizedefs", "stockdefs", "rules"];
+              for (var i = 0, len = prefs.length; i < len; i++) {
+
+                  console.log(store.get(prefs[i]));
+                //$('#'+prefs[i]).val(store.get(prefs[i]));
+
+                //$('#'+prefs[i]).attr("placeholder", store.get(prefs[i]));
+
+
+
+                $('#'+prefs[i]).attr("placeholder", "Type a Location").val("").focus().blur();
+              }
+
+
+
+
               return false;
             } else {
               $("#preferences").dialog("close");
@@ -17,20 +36,8 @@ const template = [
           }
         },
         {type: 'separator'},
-        {label: 'Quit',
-          accelerator: 'CmdOrCtrl+Q',
-          click: function () {
-            window.close();
-          }
-        }
-      ]
-  },
-  {
-    label: 'Export...',
-      submenu: [
-        {label: 'Imposition CSV\'s'},
-        {type: 'separator'},
-        {label: 'Stock Reports'}
+        {label: 'Export product CSV\'s for Metrix'},
+        {label: 'Export stock report CSV\'s '},
       ]
   },
   {
@@ -79,25 +86,9 @@ if (process.platform === 'darwin') {
       }
     ]
   })
-  // Edit menu.
-  template[1].submenu.push(
-    {
-      type: 'separator'
-    },
-    {
-      label: 'Speech',
-      submenu: [
-        {
-          role: 'startspeaking'
-        },
-        {
-          role: 'stopspeaking'
-        }
-      ]
-    }
-  )
+
   // Window menu.
-  template[3].submenu = [
+  template[2].submenu = [
     {
       label: 'Close',
       accelerator: 'CmdOrCtrl+W',
