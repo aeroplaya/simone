@@ -92,6 +92,13 @@ text-shadow: 1px 2px 0px rgba(255,255,255,.5); /* 50% white from bottom */
   margin:2px;
 }
 
+.prefvalue {
+  color:#999;
+  font-family: "Arial", adial, sans-serif;
+  font-size: 10px;
+  margin-top: -10px;
+}
+
 .medium {
    font-size: .8em !important;
 }
@@ -316,31 +323,38 @@ background:#F2F5F7; margin-top:10px; width:570px; resize:none; font-size:.7em; c
       <table border="0" width="100%">
         <tr>
           <td style="font-size:.8em;">Jobs To Prep</td>
-          <td><input id="jobstoprepdir" class="jfilestyle" type="file" style="font-size:.6em;" data-buttonText="Choose Folder" webkitdirectory /></td>
+          <td><input id="jobstoprepdir" class="jfilestyle" type="file" style="font-size:.6em;" data-buttonText="Choose Folder" webkitdirectory />
+          <p id="jobstoprepdirval" class="prefvalue">unassigned</p></td>
         </tr>
         <tr>
           <td style="font-size:.8em;">Uploaded Art</td>
-          <td><input id="uploadedartdir" class="jfilestyle" type="file" style="font-size:.6em;" data-buttonText="Choose Folder" webkitdirectory /></td>
+          <td><input id="uploadedartdir" class="jfilestyle" type="file" style="font-size:.6em;" data-buttonText="Choose Folder" webkitdirectory />
+          <p id="uploadedartdirval" class="prefvalue">unassigned</p></td>
         </tr>
         <tr>
           <td style="font-size:.8em;">Jobs On Hold</td>
-          <td><input id="jobsonholddir" class="jfilestyle" type="file" style="font-size:.6em;" data-buttonText="Choose Folder" webkitdirectory /></td>
+          <td><input id="jobsonholddir" class="jfilestyle" type="file" style="font-size:.6em;" data-buttonText="Choose Folder" webkitdirectory />
+          <p id="jobsonholddirval" class="prefvalue">unassigned</p></td>
         </tr>
         <tr>
           <td style="font-size:.8em;">Cancelled Jobs</td>
-          <td><input id="cancelledjobsdir" class="jfilestyle" type="file" style="font-size:.6em;" data-buttonText="Choose Folder" webkitdirectory /></td>
+          <td><input id="cancelledjobsdir" class="jfilestyle" type="file" style="font-size:.6em;" data-buttonText="Choose Folder" webkitdirectory />
+          <p id="cancelledjobsdirval" class="prefvalue">unassigned</p></td>
         </tr>
         <tr>
           <td style="font-size:.8em;">Size defs</td>
-          <td><input id="sizedefs" class="jfilestyle" type="file" style="font-size:.6em;" data-buttonText="Choose File" data-buttonBefore="true" /></td>
+          <td><input id="sizedefs" class="jfilestyle" type="file" style="font-size:.6em;" data-buttonText="Choose File" data-buttonBefore="true" />
+          <p id="sizedefsval" class="prefvalue">unassigned</p></td>
         </tr>
         <tr>
           <td style="font-size:.8em;">Stocks defs</td>
-          <td><input id="stockdefs" class="jfilestyle" type="file" style="font-size:.6em;" data-buttonText="Choose File" data-buttonBefore="true" /></td>
+          <td><input id="stockdefs" class="jfilestyle" type="file" style="font-size:.6em;" data-buttonText="Choose File" data-buttonBefore="true" />
+          <p id="stockdefsval" class="prefvalue">unassigned</p></td>
         </tr>
         <tr>
           <td style="font-size:.8em;">Rules</td>
-          <td><input id="rules" class="jfilestyle" type="file" style="font-size:.6em;" data-buttonText="Choose File" data-buttonBefore="true" /></td>
+          <td><input id="rules" class="jfilestyle" type="file" style="font-size:.6em;" data-buttonText="Choose File" data-buttonBefore="true" />
+          <p id="rulesval" class="prefvalue">unassigned</p></td>
         </tr>
 
       </table>
@@ -524,7 +538,7 @@ var selindex = null;
     	modal: true,
     	dialogClass: "zdlg-no-title",
       width: 500,
-      height: 395
+      height: 470
     });
     $("#preview").dialog({
       autoOpen: false,
@@ -554,7 +568,7 @@ var selindex = null;
         if ($('#' + prefs[i]).val()!='') {
           pvar=document.getElementById(prefs[i]).files[0].path;
           store.set(prefs[i], pvar);
-          console.log(store.get(prefs[i]));
+          //console.log(store.get(prefs[i]));
         }
       }
     });
