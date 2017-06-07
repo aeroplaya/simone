@@ -15,14 +15,16 @@ const template = [
               var prefs =  ["jobstoprepdir", "uploadedartdir", "jobsonholddir", "cancelledjobsdir", "sizedefs", "stockdefs", "rules"];
               for (var i = 0, len = prefs.length; i < len; i++) {
 
-                  console.log(store.get(prefs[i]));
+                  console.log(prefs[i]+"---"+store.get(prefs[i]));
                 //$('#'+prefs[i]).val(store.get(prefs[i]));
 
                 //$('#'+prefs[i]).attr("placeholder", store.get(prefs[i]));
 
-
-
-                $('#'+prefs[i]).attr("placeholder", "Type a Location").val("").focus().blur();
+//$(":file").jfilestyle({placeholder: "My place holder"});
+//$(":file").jfilestyle({placeholder: "My place holder"});
+//$("#sizedefs").jfilestyle({'placeholder': 'SHYT'});
+//alert($(":file").jfilestyle('input'));
+//                $('#sizedefs').jfilestyle({placeholder: "HELLO"});
               }
 
 
