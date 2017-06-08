@@ -650,6 +650,44 @@ document.ondragover = document.ondrop = (ev) => {
              $("#filelist").empty();
              document.getElementById('droppedFolder').innerHTML=name;
 
+/*
+var words = ["spray", "limit", "elite", "exuberant", "destruction", "present"];
+
+var longWords = words.filter(function(word){
+  return word.length > 6;
+})
+
+// Filtered array longWords is ["exuberant", "destruction", "present"]
+*/
+
+const readify = require('readify');
+var start = new Date().getTime() / 1000;
+
+readify(folderpath, {sort: 'name', order: 'asc'}, (error, data) => {
+//
+  files=data.files.map((b) => b.name)
+  function nobeginsdot(item) {
+    return item.toLowerCase().indexOf('.') != 0;
+  }
+  var cleanfiles = files.filter(nobeginsdot);
+  var cList = $('#filelist');
+  for (var i = 0, len = cleanfiles.length; i <len; i++) {
+    //console.log(cleanfiles[i]);
+    var li = $('<li/>')
+    .addClass('ui-widget-content')
+    .appendTo(cList);
+    var aaa = $('<a/>')
+    .addClass('ui-all')
+    .text(cleanfiles[i])
+    .appendTo(li);
+  }
+  $('a[href$="#toprep"]').text('To Prep ('+$('#filelist li').length+')');
+  var stop = new Date().getTime() / 1000;
+  console.log("TIME: "+(stop-start));
+});
+
+
+/*
               fs.readdir(path, function(err, items) {
               var cList = $('#filelist');
 
@@ -732,11 +770,10 @@ document.ondragover = document.ondrop = (ev) => {
                   //alert($("#filelist")[0].selectedIndex)
               })
 
-/*
-              watcher.on('change', function(file, stats) {
-                console.log(file + ' was changed')
-              })
-*/
+//  watcher.on('change', function(file, stats) {
+//                console.log(file + ' was changed')
+//              })
+
 
               // Unwatch specific files or directories.
               //watcher.unwatch('/tmp/another_file')
@@ -747,7 +784,7 @@ document.ondragover = document.ondrop = (ev) => {
 
 
 
-
+*/
             }
 
            //console.log(stats);

@@ -6,10 +6,11 @@
   "main": "simone.js",
   "dependencies": {
     "electron": "^1.7.2",
+    "electron-store": "^1.1.0",
     "fs": "0.0.2",
     "menubar": "^5.2.3",
     "path": "^0.12.7",
-    "electron-store": "^1.1.0"
+    "readify": "^4.1.4"
   },
   "devDependencies": {},
   "scripts": {
