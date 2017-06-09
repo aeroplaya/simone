@@ -17,6 +17,9 @@ const template = [
                 //console.log(prefs[i]+"---"+store.get(prefs[i]));
                 $('#'+prefs[i]+'val').text(store.get(prefs[i]));
               }
+              $('#uploadedartdirdays').val(store.get('uploadedartdirdays'));
+
+
               return false;
             } else {
               $("#preferences").dialog("close");

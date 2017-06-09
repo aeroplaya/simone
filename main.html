@@ -327,9 +327,11 @@ background:#F2F5F7; margin-top:10px; width:570px; resize:none; font-size:.7em; c
           <p id="jobstoprepdirval" class="prefvalue">unassigned</p></td>
         </tr>
         <tr>
-          <td style="font-size:.8em;">Uploaded Art</td>
+          <td style="font-size:.8em;vertical-align:top;">Uploaded Art</td>
           <td><input id="uploadedartdir" class="jfilestyle" type="file" style="font-size:.6em;" data-buttonText="Choose Folder" webkitdirectory />
-          <p id="uploadedartdirval" class="prefvalue">unassigned</p></td>
+          <p id="uploadedartdirval" class="prefvalue">unassigned</p>
+          <label class="prefvalue" for="uploadedartdirdays">Uploaded Art: Include days back from today (0=all)</label><input class="prefvalue" style="font-size:.6em;" id="uploadedartdirdays" size="4"><br />&nbsp;
+        </td>
         </tr>
         <tr>
           <td style="font-size:.8em;">Jobs On Hold</td>
@@ -538,7 +540,7 @@ var selindex = null;
     	modal: true,
     	dialogClass: "zdlg-no-title",
       width: 500,
-      height: 470
+      height: 520
     });
     $("#preview").dialog({
       autoOpen: false,
@@ -567,10 +569,11 @@ var selindex = null;
         //prefs[i]
         if ($('#' + prefs[i]).val()!='') {
           pvar=document.getElementById(prefs[i]).files[0].path;
-          store.set(prefs[i], pvar);
+            store.set(prefs[i], pvar);
           //console.log(store.get(prefs[i]));
         }
       }
+      store.set("uploadedartdirdays", $("#uploadedartdirdays").val());
     });
 
     //initialze preferences
@@ -663,9 +666,37 @@ var longWords = words.filter(function(word){
 const readify = require('readify');
 var start = new Date().getTime() / 1000;
 
+
+
 readify(folderpath, {sort: 'name', order: 'asc'}, (error, data) => {
 //
-  files=data.files.map((b) => b.name)
+//files=data.files.map((b) => b.name)
+//dates=data.files.map((b) => b.date)
+
+console.log(data);
+});
+
+Array.prototype.combine = function(arr) {
+    return this.map(function(v,i) {
+        return [v, arr[i]];
+    });
+};
+
+
+
+//var listing = listing.combine(dates);
+
+
+
+
+
+//console.log(listing);
+/*
+for (var i=0; i<arrayA.length && i<arrayB.length; i++)
+    jarray[i] = [arrayB[i], [arrayA[i]]];
+
+//var listing = Object.assign({}, dates, files);
+//console.log(data);
   function nobeginsdot(item) {
     return item.toLowerCase().indexOf('.') != 0;
   }
@@ -684,8 +715,8 @@ readify(folderpath, {sort: 'name', order: 'asc'}, (error, data) => {
   $('a[href$="#toprep"]').text('To Prep ('+$('#filelist li').length+')');
   var stop = new Date().getTime() / 1000;
   console.log("TIME: "+(stop-start));
-});
 
+*/
 
 /*
               fs.readdir(path, function(err, items) {
